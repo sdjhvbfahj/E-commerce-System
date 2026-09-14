@@ -1,24 +1,16 @@
 <template>
-    <!-- 首屏：左边分类（白卡片） + 右边轮播（原版是分类压在轮播上的绝对定位） -->
-    <div class="hero">
-        <div class="wrapper">
-            <div class="hero-aside">
-                <HomeCategory/>
-            </div>
-            <div class="hero-main">
-                <HomeBanner/>
-            </div>
-        </div>
+    <!-- 首屏：整块轮播，左侧分类悬浮在轮播上（原来的样子，配色用新的） -->
+    <div class="container wrapper">
+        <HomeCategory/>
+        <HomeBanner/>
     </div>
-
-    <!-- 中间商品区 -->
+    <!-- 中间两个板块 -->
     <div class="mid">
         <div class="wrapper">
             <HomeNew/>
             <HomeHot/>
         </div>
     </div>
-
     <HomeProduct/>
 </template>
 
@@ -35,29 +27,11 @@
         width: 1240px;
         margin: 0px auto;
     }
-    .hero {
-        padding-top: 22px;
-
-        .wrapper {
-            display: flex;
-            align-items: stretch;
-            gap: 18px;
-        }
-    }
-    .hero-aside {
-        width: 244px;
-        flex-shrink: 0;
+    .container {
         position: relative;
-        z-index: 2;
-    }
-    .hero-main {
-        flex: 1;
-        min-width: 0;
-        position: relative;
-        z-index: 1;
     }
     .mid {
-        padding-top: 10px;
+        padding-top: 20px;
 
         .wrapper {
             display: flex;

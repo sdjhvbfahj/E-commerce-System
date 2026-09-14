@@ -5,6 +5,7 @@
  *   GET  /category、/category/sub/filter
  *   POST /category/goods/temporary
  *   GET  /goods、/goods/hot、/goods/relevant
+ *   GET  /search（本项目自拟：关键词搜索商品与分类）
  */
 import { getBanners } from '../data/banners';
 import { getGoodsBlocks, getHotGoods, getNewGoods } from '../data/home';
@@ -15,6 +16,7 @@ import {
     getSubCategoryGoods,
 } from '../data/categories';
 import { findProduct, productsByCat, recommendProducts, toListItem, type Product } from '../data/products';
+import { searchProducts } from '../data/search';
 import { fail, toNumber, toText, type MockContext } from '../types';
 
 /** 详情页需要的完整数据 */
@@ -97,5 +99,16 @@ export const goodsRoutes = {
     '/goods/relevant': (ctx: MockContext) => {
         const limit = toNumber(ctx.params.limit, 4);
         return recommendProducts(limit || 4);
+    },
+
+    /**
+     * 关键词搜索：商品名 / 二级分类 / 一级分类 / 卖点 / 品牌都会参与匹配，
+     * 同时返回命中的分类，页面上可以一键跳过去
+     */
+    '/search': (ctx: MockContext) => {
+        const keyword = toText(ctx.params.keyword || ctx.params.q);
+        const page = toNumber(ctx.params.page, 1);
+        const pageSize = toNumber(ctx.params.pageSize, 20);
+        return searchProducts(keyword, page || 1, pageSize || 20);
     },
 };

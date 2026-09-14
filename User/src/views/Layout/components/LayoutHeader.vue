@@ -32,48 +32,26 @@
 <script setup lang="ts" name="LayoutHeader">
     import { ref } from 'vue'
     import { useRouter } from 'vue-router'
-    import { ElMessage } from 'element-plus'
     import LayoutHeaderUI from './LayoutHeaderUI.vue';
     import HeaderCart from './HeaderCart.vue'
-    import { useCategoryStore } from '@/stores/categoryStore'
-    import { catIdOf } from '@/mock/data/ids'
 
     const router = useRouter();
-    const categoryStore = useCategoryStore();
     const keyword = ref('');
 
-    // 热词直接指向真实分类，点了就能用
-    const hotwords = [
-        { name: '车厘子', path: `/category/${catIdOf(1)}` },
-        { name: '蓝牙耳机', path: `/category/${catIdOf(6)}` },
-        { name: '瑜伽垫', path: `/category/${catIdOf(7)}` },
-        { name: '母婴', path: `/category/${catIdOf(3)}` },
-    ];
+    // 热门搜索词：直接跳到搜索结果页
+    const hotwords = ['车厘子', '蓝牙耳机', '瑜伽垫', '收纳箱'].map((word) => ({
+        name: word,
+        path: `/search?keyword=${encodeURIComponent(word)}`,
+    }));
 
     /**
-     * 项目里没有搜索接口，这里按分类名做一次本地匹配后跳到对应分类页，
-     * 匹配不到就给个提示，避免点了搜索没有任何反馈
+     * 搜索：直接把关键词交给搜索结果页，
+     * 那边会同时匹配商品名、分类名、卖点和品牌（见 mock 的 /search 接口）
      */
     function doSearch() {
         const value = keyword.value.trim();
         if (!value) return;
-        const cat = categoryStore.categoryList.find(
-            (item) => item.name.includes(value) || value.includes(item.name)
-        );
-        if (cat) {
-            router.push(`/category/${cat.id}`);
-            return;
-        }
-        for (const item of categoryStore.categoryList) {
-            const sub = (item.children ?? []).find(
-                (child) => child.name.includes(value) || value.includes(child.name)
-            );
-            if (sub) {
-                router.push(`/category/sub/${sub.id}`);
-                return;
-            }
-        }
-        ElMessage({ message: `没有找到与「${value}」相关的分类，换个关键词试试`, type: 'info' });
+        router.push({ path: '/search', query: { keyword: value } });
     }
 </script>
 

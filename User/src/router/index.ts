@@ -23,6 +23,7 @@ const AppDownload = () => import('@/views/AppDownload/index.vue');
 const Brand = () => import('@/views/Brand/index.vue');
 const Topic = () => import('@/views/Topic/index.vue');
 const Register = () => import('@/views/Register/index.vue');
+const Search = () => import('@/views/Search/index.vue');
 const NotFound = () => import('@/views/NotFound/index.vue');
 
 const router = createRouter({
@@ -118,6 +119,12 @@ const router = createRouter({
           name: 'Help',
           path: 'help',
           component: Help
+        },
+        // 搜索结果页
+        {
+          name: 'Search',
+          path: 'search',
+          component: Search
         },
         // 关于我们
         {

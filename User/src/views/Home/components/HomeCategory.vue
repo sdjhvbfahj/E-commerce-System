@@ -4,9 +4,7 @@
             <ul>
                 <li v-for="item in categoryStore.categoryList" :key="item.id">
                     <RouterLink :to="`/category/${item.id}`" class="categoryTitle">{{ item.name }}</RouterLink>
-                    <span class="dot">/</span>
                     <RouterLink :to="`/category/sub/${chil.id}`" class="categoryContent" v-for="chil in item.children.slice(0,2)" :key="chil.id">{{ chil.name }}</RouterLink>
-                    <i class="iconfont icon-jinru arrow"></i>
                     <div class="layer">
                         <span class="recommend">
                             <h4>分类推荐</h4>
@@ -38,168 +36,113 @@
     .HomeCategory {
         position: relative;
         z-index: 2;
-        width: 100%;
         height: 500px;
-    }
-    .category {
-        width: 100%;
-        height: 100%;
-        background-color: #fff;
-        border-radius: 16px;
-        box-shadow: 0 2px 10px rgba(35, 40, 56, 0.06);
-
-        ul {
-            position: relative;
+        width: 250px;
+        .category {
             width: 100%;
             height: 100%;
-            display: flex;
-            flex-direction: column;
-            padding: 8px 0;
-
-            li {
+            ul {
                 position: relative;
+                width: 100%;
+                height: 100%;
                 display: flex;
-                flex: 1;
-                align-items: center;
-                padding: 0 14px 0 20px;
-                border-radius: 10px;
-                transition: background 0.25s;
-
-                // 一级分类
-                .categoryTitle {
-                    font-size: 14px;
-                    font-weight: 500;
-                    color: $inkColor;
-                }
-                .dot {
-                    margin: 0 5px;
-                    color: #d8dbe2;
-                    font-size: 12px;
-                }
-                // 二级分类
-                .categoryContent {
-                    font-size: 12px;
-                    color: $inkColor3;
-                    margin-right: 8px;
-
-                    &:hover {
-                        color: $brandColor;
-                    }
-                }
-                .arrow {
-                    position: absolute;
-                    right: 14px;
-                    font-size: 12px;
-                    color: #d8dbe2;
-                    opacity: 0;
-                    transition: opacity 0.25s;
-                }
-                &:hover {
-                    background: $brandColorSoft;
-
+                flex-direction: column;
+                background-color: rgba(35, 40, 56, 0.88);
+                li {
+                    padding-left: 40px;
+                    display: flex;
+                    flex: 1;
+                    align-items: center;
+                    // 一级分类样式
                     .categoryTitle {
-                        color: $brandColor;
+                        font-size: 16px;
+                        color: #fff;
                     }
-                    .arrow {
-                        opacity: 1;
-                        color: $brandColor;
+                    // 二级分类样式
+                    .categoryContent {
+                        font-size: 14px;
+                        color: #fff;
+                        margin-left: 10px;
                     }
+                    &:hover {
+                        background-color: $brandColor;
+                        .layer {
+                            display: block;
+                        }
+                    }
+                    // layer弹层样式
                     .layer {
-                        display: block;
-                    }
-                }
-
-                // 悬浮弹层
-                .layer {
-                    position: absolute;
-                    top: -8px;
-                    left: 100%;
-                    margin-left: 18px;
-                    width: 978px;
-                    height: 500px;
-                    padding: 24px 22px;
-                    background-color: #fff;
-                    border-radius: 16px;
-                    box-shadow: 0 18px 40px rgba(35, 40, 56, 0.14);
-                    display: none;
-
-                    .recommend {
-                        display: flex;
-                        align-items: flex-end;
-
-                        h4 {
-                            font-size: 18px;
-                            font-weight: 500;
-                            color: $inkColor;
-                        }
-                        p {
-                            margin-left: 12px;
-                            font-size: 12px;
-                            color: $inkColor3;
-                        }
-                    }
-                    .goods {
-                        display: flex;
-                        flex-wrap: wrap;
-                        gap: 8px;
-                        margin-top: 16px;
-
-                        a {
+                        position: absolute;
+                        width: 990px;
+                        height: 500px;
+                        top: 0px;
+                        left: 250px;
+                        background-color: rgba(255, 255, 255, 0.94);
+                        padding: 10px;
+                        display: none;
+                        .recommend {
+                            margin-top: 18px;
                             display: flex;
-                            align-items: center;
-                            gap: 12px;
-                            width: 304px;
-                            height: 122px;
-                            padding: 11px 12px;
-                            border-radius: 10px;
-                            background-color: #fafbfc;
-                            transition: all 0.25s;
-
-                            img {
-                                width: 100px;
-                                height: 100px;
-                                flex-shrink: 0;
-                                border-radius: 8px;
-                                object-fit: cover;
-                                background-color: #f0f1f4;
+                            align-items: flex-end;
+                            h4 {
+                                margin-left: 10px;
+                                font-size: 20px;
+                                font-weight: 400;
                             }
-                            .goodsContent {
-                                flex: 1;
-                                min-width: 0;
-
-                                h5 {
-                                    font-size: 13px;
-                                    font-weight: 400;
-                                    color: $inkColor;
-                                    white-space: nowrap;
-                                    overflow: hidden;
-                                    text-overflow: ellipsis;
+                            p {
+                                margin-left: 14px;
+                                font-size: 14px;
+                                color: $inkColor2;
+                            }
+                        }
+                        .goods {
+                            padding-top: 30px;
+                            padding-bottom: 30px;
+                            display: flex;
+                            align-items: space-between;
+                            flex-wrap: wrap;
+                            width: 100%;
+                            height: 100%;
+                            a {
+                                display: flex;
+                                align-items: center;
+                                margin-left: 14px;
+                                width: 306px;
+                                height: 120px;
+                                background-color: #fff;
+                                img {
+                                    margin-left: 10px;
+                                    width: 100px;
+                                    height: 100px;
                                 }
-                                .desc {
-                                    margin-top: 4px;
-                                    color: $inkColor3;
-                                    font-size: 12px;
-                                    display: -webkit-box;
-                                    overflow: hidden;
-                                    -webkit-line-clamp: 2;
-                                    line-clamp: 2;
-                                    -webkit-box-orient: vertical;
-                                    word-break: break-all;
-                                }
-                                .price {
-                                    margin-top: 4px;
-                                    color: $priceColor;
-                                    font-size: 13px;
-
-                                    i {
+                                .goodsContent {
+                                    padding-left: 10px;
+                                    display: flex;
+                                    flex-direction: column;
+                                    h5 {
+                                        margin: 0px;
+                                        font-weight: 400;
                                         font-size: 16px;
-                                        font-style: normal;
+                                        color: $inkColor2;
+                                    }
+                                    .desc {
+                                        color: $inkColor3;
+                                        font-size: 14px;
+                                        display: -webkit-box;
+                                        overflow: hidden;
+                                        -webkit-line-clamp: 2;
+                                        line-clamp: 2;
+                                        -webkit-box-orient: vertical;
+                                        word-break: break-all;
+                                    }
+                                    .price {
+                                        color: $priceColor;
+                                        font-size: 14px;
+                                        i {
+                                            font-size: 20px;
+                                        }
                                     }
                                 }
-                            }
-                            &:hover {
-                                background-color: #fff;
-                                box-shadow: 0 6px 18px rgba(35, 40, 56, 0.1);
                             }
                         }
                     }

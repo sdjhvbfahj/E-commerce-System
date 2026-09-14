@@ -25,8 +25,12 @@
 </script>
 
 <style scoped lang="scss">
+    /* 首页 / 居家 / 美食 … 这些 tab 整体居中 */
     .nav {
         flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     .nav ul {
         display: flex;
