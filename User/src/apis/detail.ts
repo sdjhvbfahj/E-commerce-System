@@ -1,4 +1,4 @@
-import httpInstance from "@/utils/http.ts"
+import httpInstance from "@/mock"
 
 /**
  * @description: 获取详情信息

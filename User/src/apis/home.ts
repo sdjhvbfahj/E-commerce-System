@@ -1,4 +1,4 @@
-import httpInstance from "@/utils/http"
+import httpInstance from "@/mock"
 
 // 向服务器请求banner图数据
 // 将其封装成一个函数

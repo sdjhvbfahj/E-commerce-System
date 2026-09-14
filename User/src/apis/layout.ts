@@ -1,4 +1,4 @@
-import httpInstance from "@/utils/http.ts";
+import httpInstance from "@/mock";
 // 向服务器请求导航区选项数据(封装成一个函数)
 export function getCategoryAPI() {
     return httpInstance({

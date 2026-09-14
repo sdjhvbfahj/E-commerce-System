@@ -1,4 +1,4 @@
-import httpInstance from "@/utils/http"
+import httpInstance from "@/mock"
 
 // 获取订单数据
 export interface ParamsItem {

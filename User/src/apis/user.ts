@@ -1,4 +1,4 @@
-import httpInstance from "@/utils/http"
+import httpInstance from "@/mock"
 
 /**
  * @description: 判断是否登录成功

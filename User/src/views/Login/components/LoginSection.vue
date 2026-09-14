@@ -17,6 +17,8 @@
                           <el-checkbox size="large" v-model="ruleForm.agree">我已同意隐私条款和服务条款</el-checkbox>
                       </el-form-item>
                       <el-button size="large" class="!ml-0 subBtn" :plain="true" @click="formSubmit">点击登录</el-button>
+                      <!-- 假数据演示提示 -->
+                      <p class="mock-tip">演示环境：账号可任意填写，密码 6-20 位即可登录</p>
                     </el-form>
                 </div>
             </div>
@@ -228,5 +230,12 @@
         background: $xtxColor;
         width: 100%;
         color: #fff;
+    }
+    // 假数据演示提示
+    .mock-tip {
+        margin-top: 12px;
+        font-size: 12px;
+        color: #999;
+        text-align: center;
     }
 </style>
