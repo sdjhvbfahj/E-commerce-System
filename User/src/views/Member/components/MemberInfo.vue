@@ -8,18 +8,18 @@
         <h4>{{ userStore?.userInfo?.account }}</h4>
         </div>
         <div class="item">
-            <a href="javascript:;">
+            <RouterLink to="/member/memberInfo">
                 <span class="iconfont icon-huiyuan"></span>
                 <p>会员中心</p>
-            </a>
-            <a href="javascript:;">
+            </RouterLink>
+            <RouterLink to="/help?type=help">
                 <span class="iconfont icon-anquanshezhi"></span>
                 <p>安全设置</p>
-            </a>
-            <a href="javascript:;">
+            </RouterLink>
+            <RouterLink to="/member/memberAddress">
                 <span class="iconfont icon-dw"></span>
                 <p>地址管理</p>
-            </a>
+            </RouterLink>
         </div>
     </div>
     <div class="like-container">

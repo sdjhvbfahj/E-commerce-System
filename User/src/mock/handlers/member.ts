@@ -234,6 +234,9 @@ export const memberRoutes = {
         return order;
     },
 
+    /** 收货地址列表（会员中心 - 地址管理页面用） */
+    'GET /member/address': () => getDb().addresses,
+
     /** 新增收货地址 */
     'POST /member/address': (ctx: MockContext) => {
         const db = getDb();

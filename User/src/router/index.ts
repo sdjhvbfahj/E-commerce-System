@@ -16,6 +16,14 @@ const PayBack = () => import('@/views/Pay/components/PayBack.vue');
 const Member = () => import('@/views/Member/index.vue');
 const MemberInfo = () => import('@/views/Member/components/MemberInfo.vue');
 const MemberOrder = () => import('@/views/Member/components/MemberOrder.vue');
+const MemberAddress = () => import('@/views/Member/components/MemberAddress.vue');
+const Help = () => import('@/views/Help/index.vue');
+const About = () => import('@/views/About/index.vue');
+const AppDownload = () => import('@/views/AppDownload/index.vue');
+const Brand = () => import('@/views/Brand/index.vue');
+const Topic = () => import('@/views/Topic/index.vue');
+const Register = () => import('@/views/Register/index.vue');
+const NotFound = () => import('@/views/NotFound/index.vue');
 
 const router = createRouter({
   history: createWebHistory(),
@@ -80,6 +88,11 @@ const router = createRouter({
           path: 'member',
           component: Member,
           children: [
+            // 直接访问 /member 时默认展示个人中心
+            {
+              path: '',
+              redirect: { name: 'MemberInfo' }
+            },
             // 个人信息页面
             {
               name: 'MemberInfo',
@@ -91,10 +104,58 @@ const router = createRouter({
               name: 'MemberOrder',
               path: 'memberOrder',
               component: MemberOrder,
+            },
+            // 地址管理页面
+            {
+              name: 'MemberAddress',
+              path: 'memberAddress',
+              component: MemberAddress,
             }
           ]
+        },
+        // 帮助中心
+        {
+          name: 'Help',
+          path: 'help',
+          component: Help
+        },
+        // 关于我们
+        {
+          name: 'About',
+          path: 'about',
+          component: About
+        },
+        // 手机版下载
+        {
+          name: 'AppDownload',
+          path: 'app',
+          component: AppDownload
+        },
+        // 品牌专区
+        {
+          name: 'Brand',
+          path: 'brand',
+          component: Brand
+        },
+        // 专题活动
+        {
+          name: 'Topic',
+          path: 'topic',
+          component: Topic
+        },
+        // 404（放在最后兜底，未匹配到的地址都会落到这里）
+        {
+          name: 'NotFound',
+          path: ':pathMatch(.*)*',
+          component: NotFound
         }
       ]
+    },
+    // 注册页面路由
+    {
+      name: 'Register',
+      path: '/register',
+      component: Register
     },
     // 登陆页面路由
     {

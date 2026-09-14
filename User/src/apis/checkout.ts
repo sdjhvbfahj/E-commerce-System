@@ -86,6 +86,18 @@ export function addNewAddressAPI(data:AddNewAddress) {
 }
 
 /**
+ * @description: 收货地址列表（会员中心 - 地址管理页面用）
+ * @param {*}
+ * @return {*}
+ */
+export function getAddressListAPI() {
+    return httpInstance({
+        url: '/member/address',
+        method: 'GET',
+    });
+}
+
+/**
  * @description: 删除地址信息详情
  * @param {*}
  * @return {*}

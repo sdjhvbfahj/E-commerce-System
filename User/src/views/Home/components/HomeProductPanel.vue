@@ -12,7 +12,7 @@
                         <RouterLink class="category" :to="`/category/sub/${item.id}`">{{ item.name }}</RouterLink>
                     </li>
                     <!-- 查看更多选项 -->
-                    <RouterLink class="more" to="/">
+                    <RouterLink class="more" :to="`/category/${catId}`">
                         查看更多
                         <i class="iconfont icon-jinru"></i>
                     </RouterLink>
@@ -27,7 +27,7 @@
 </template>
 
 <script setup lang="ts" name="HomeProductPanel">
-    defineProps(['title', 'category']);
+    defineProps(['title', 'category', 'catId']);
 </script>
 
 <style scoped lang="scss">

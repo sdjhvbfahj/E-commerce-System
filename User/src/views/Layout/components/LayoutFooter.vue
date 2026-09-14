@@ -36,7 +36,7 @@
                                 <div class="right">
                                     <p>扫描二维码</p>
                                     <p>立马下载APP</p>
-                                    <a href="javascript:;">下载页面</a>
+                                    <RouterLink to="/app">下载页面</RouterLink>
                                 </div>
                             </div>
                         </li>
@@ -61,13 +61,13 @@
                     </div>
                     <div class="copyright">
                         <ul>
-                            <li><a href="javascript:;">关于我们</a></li>
-                            <li><a href="javascript:;">帮助中心</a></li>
-                            <li><a href="javascript:;">售后服务</a></li>
-                            <li><a href="javascript:;">配送与验收</a></li>
-                            <li><a href="javascript:;">商务合作</a></li>
-                            <li><a href="javascript:;">搜索推荐</a></li>
-                            <li><a href="javascript:;">友情链接</a></li>
+                            <li><RouterLink to="/about">关于我们</RouterLink></li>
+                            <li><RouterLink to="/help?type=help">帮助中心</RouterLink></li>
+                            <li><RouterLink to="/help?type=service">售后服务</RouterLink></li>
+                            <li><RouterLink to="/help?type=delivery">配送与验收</RouterLink></li>
+                            <li><RouterLink to="/help?type=business">商务合作</RouterLink></li>
+                            <li><RouterLink to="/help?type=search">搜索推荐</RouterLink></li>
+                            <li><RouterLink to="/help?type=links">友情链接</RouterLink></li>
                         </ul>
                         <span>Copyright © 小兔鲜</span>
                     </div>

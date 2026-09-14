@@ -7,6 +7,7 @@
  */
 import { goodsRoutes } from './handlers/goods';
 import { memberRoutes } from './handlers/member';
+import { pageRoutes } from './handlers/page';
 import { userRoutes } from './handlers/user';
 import type { MockHandler, MockRoute } from './types';
 
@@ -41,6 +42,11 @@ Object.entries(goodsRoutes).forEach(([path, handler]) => {
 
 register(userRoutes);
 register(memberRoutes);
+
+// 内容型页面（帮助中心 / 关于我们 / 品牌专区 / 专题活动）都是 GET
+Object.entries(pageRoutes).forEach(([path, handler]) => {
+    push('GET', path, handler);
+});
 
 /** 最终路由表：静态在前，动态在后 */
 export const routes: MockRoute[] = [...staticRoutes, ...dynamicRoutes];

@@ -5,6 +5,7 @@
             <h4>我的账户</h4>
             <div class="links">
                 <RouterLink to="/member/memberInfo">个人中心</RouterLink>
+                <RouterLink to="/member/memberAddress">地址管理</RouterLink>
             </div>
             <h4>交易管理</h4>
             <div class="links">

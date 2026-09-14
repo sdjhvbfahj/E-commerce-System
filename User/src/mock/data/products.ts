@@ -2,7 +2,7 @@
  * 商品假数据：由 catalog.ts 自动构建
  * ---------------------------------------------------------------------------
  * 自动生成的内容包括：
- *  - 商品主图 / 详情长图（离线 SVG 假图）
+ *  - 商品主图 / 详情长图（离线 SVG 假图；少数重点商品用真实照片）
  *  - 规格（specs）与 SKU 组合（skus）：支持详情页 XtxSku 组件的选择联动
  *  - 品牌、销量、评价数、收藏数、上架时间（用于排序）
  */
@@ -10,6 +10,41 @@ import { CATALOG, type SpecSeed } from './catalog';
 import { catIdOf, productIdOf, subIdOf } from './ids';
 import { image, imageSet } from '../utils/image';
 import { price as fmtPrice, shuffle } from '../utils/helper';
+
+// 真实商品照片（来源与授权见 assets/images/goods/ATTRIBUTION.json）
+import cherriesPhoto from '@/assets/images/goods/cherries.jpg';
+import tshirtPhoto from '@/assets/images/goods/tshirt.jpg';
+import earbudsPhoto from '@/assets/images/goods/earbuds.jpg';
+import headphonesPhoto from '@/assets/images/goods/headphones.jpg';
+import panPhoto from '@/assets/images/goods/pan-nonstick.jpg';
+import tablewarePhoto from '@/assets/images/goods/tableware.jpg';
+import yogaMatPhoto from '@/assets/images/goods/yoga-mat.jpg';
+
+/**
+ * 少数「重点商品」用真实照片展示，其余商品继续用离线 SVG 假图。
+ * 想再换商品：在这里加一行「商品名 -> 图片地址」即可（也可以直接写外链）。
+ */
+const REAL_PICTURES: Record<string, string> = {
+    '智利进口车厘子2斤': cherriesPhoto,
+    '纯棉基础款圆领T恤': tshirtPhoto,
+    '真无线蓝牙耳机': earbudsPhoto,
+    '头戴式降噪耳机': headphonesPhoto,
+    '麦饭石不粘炒锅': panPhoto,
+    '日式陶瓷餐具套装': tablewarePhoto,
+    '加厚防滑瑜伽垫': yogaMatPhoto,
+};
+
+/** 取商品主图：优先真实照片，否则用生成的假图 */
+function mainPicture(name: string, seed: number): string {
+    return REAL_PICTURES[name] ?? image(name, { width: 400, height: 400, seed });
+}
+
+/** 取商品多图：有真实照片时把它放在第一张 */
+function mainPictures(name: string, seed: number): string[] {
+    const real = REAL_PICTURES[name];
+    const generated = imageSet(name, real ? 4 : 5, { width: 400, height: 400, seed: seed + 11 });
+    return real ? [real, ...generated] : generated;
+}
 
 export interface SpecValue {
     name: string;
@@ -175,7 +210,7 @@ function buildProducts(): Product[] {
                     desc: seed.desc,
                     price: fmtPrice(basePrice),
                     oldPrice: fmtPrice(seed.oldPrice ?? basePrice * 1.25),
-                    picture: image(seed.name, { width: 400, height: 400, seed: numericSeed }),
+                    picture: mainPicture(seed.name, numericSeed),
                     catId,
                     catName: cat.name,
                     subId,
@@ -185,7 +220,7 @@ function buildProducts(): Product[] {
                     // 上架时间：越靠前的商品越新，保证「最新商品」排序有变化
                     publishTime: Date.parse('2024-09-01T10:00:00+08:00') - counter * 36e5 * 7,
                     brand,
-                    mainPictures: imageSet(seed.name, 5, { width: 400, height: 400, seed: numericSeed }),
+                    mainPictures: mainPictures(seed.name, numericSeed),
                     details: {
                         pictures: imageSet(`${seed.name} 商品详情`, 4, {
                             width: 800,

@@ -5,7 +5,7 @@
             <!-- 初始化/页面刷新时pinia会从localStorage读取数据, 所以手动删除以后pinia里面的数据也会为空, 从而实现token判断失败 -->
             <ul v-if="userStore?.userInfo?.token">
                 <li>
-                    <RouterLink to="/"><i class="iconfont icon-user-filling"></i>{{ userStore?.userInfo?.account || '小兔鲜用户' }}</RouterLink>
+                    <RouterLink to="/member/memberInfo"><i class="iconfont icon-user-filling"></i>{{ userStore?.userInfo?.account || '小兔鲜用户' }}</RouterLink>
                 </li>
                 <li>
                     <el-popconfirm title="确定退出登录吗？" width="160" @confirm="exitLogin">
@@ -15,19 +15,20 @@
                     </el-popconfirm>
                 </li>
                 <li><RouterLink to="/member/memberOrder">我的订单</RouterLink></li>
+                <li><RouterLink to="/member/memberAddress">地址管理</RouterLink></li>
                 <li><RouterLink to="/member/memberInfo">会员中心</RouterLink></li>
-                <li><RouterLink to="/">帮助中心</RouterLink></li>
-                <li><RouterLink to="/">关于我们</RouterLink></li>
-                <li><RouterLink to="/"><i class="iconfont icon-mobile-phone"></i>手机版</RouterLink></li>
+                <li><RouterLink to="/help">帮助中心</RouterLink></li>
+                <li><RouterLink to="/about">关于我们</RouterLink></li>
+                <li><RouterLink to="/app"><i class="iconfont icon-mobile-phone"></i>手机版</RouterLink></li>
             </ul>
             <ul v-else>
                 <li><RouterLink to="/login">请先登录</RouterLink></li>
-                <li><RouterLink to="/login">免费注册</RouterLink></li>
-                <li><RouterLink to="/">我的订单</RouterLink></li>
-                <li><RouterLink to="/">会员中心</RouterLink></li>
-                <li><RouterLink to="/">帮助中心</RouterLink></li>
-                <li><RouterLink to="/">关于我们</RouterLink></li>
-                <li><RouterLink to="/"><i class="iconfont icon-mobile-phone"></i>手机版</RouterLink></li>
+                <li><RouterLink to="/register">免费注册</RouterLink></li>
+                <li><RouterLink to="/login">我的订单</RouterLink></li>
+                <li><RouterLink to="/about">关于我们</RouterLink></li>
+                <li><RouterLink to="/help">帮助中心</RouterLink></li>
+                <li><RouterLink to="/topic">专题活动</RouterLink></li>
+                <li><RouterLink to="/app"><i class="iconfont icon-mobile-phone"></i>手机版</RouterLink></li>
             </ul>
         </div>
     </div>

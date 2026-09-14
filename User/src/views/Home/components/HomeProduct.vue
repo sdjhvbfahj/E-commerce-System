@@ -1,7 +1,7 @@
 <template>
     <div class="HomeProduct" v-for="item in goodsList" :key="item.id">
         <div class="wrapper">
-            <HomeProductPanel :title="item.name" :category="item.children">
+            <HomeProductPanel :title="item.name" :category="item.children" :cat-id="item.id">
                 <!-- 默认插槽 -->
                 <div class="content">
                     <div class="left">

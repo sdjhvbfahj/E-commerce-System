@@ -37,11 +37,13 @@ src/mock/
 │   ├── categories.ts   导航分类、分类页、二级分类筛选与分页列表
 │   ├── home.ts         首页新鲜好物、人气推荐、商品楼层
 │   ├── banners.ts      首页 / 分类页轮播图
+│   ├── pages.ts        帮助中心 / 关于我们 / 品牌专区 / 专题活动
 │   └── seed.ts         用户信息、收货地址、历史订单的初始数据
 └── handlers/           接口处理器（一个文件对应一组业务）
     ├── goods.ts        首页 / 分类 / 商品详情
     ├── member.ts       购物车 / 地址 / 订单 / 假支付
-    └── user.ts         登录
+    ├── page.ts         帮助中心 / 关于我们 / 品牌专区 / 专题活动
+    └── user.ts         登录 / 注册
 ```
 
 ## 三、假数据是怎么来的
@@ -51,11 +53,27 @@ src/mock/
 
 | 自动生成 | 说明 |
 | --- | --- |
-| 商品主图 / 详情长图 | `utils/image.ts` 现场画内联 SVG（渐变 + 商品名 + 水印），完全离线 |
+| 商品主图 / 详情长图 | `utils/image.ts` 现场画内联 SVG（渐变 + 商品名），完全离线；**少数重点商品用真实照片**，见下 |
 | 规格与 SKU | 按分类的规格模板做笛卡尔积，例如服饰 = 颜色 3 种 × 尺码 4 种 = 12 个 SKU |
 | 缺货 SKU | 每个 SKU ≥ 4 的商品会留一个 `inventory: 0`，用来演示详情页规格的**禁用态** |
 | 品牌 | 每个一级分类对应一个品牌（品牌名 / 英文名 / logo / 一句话介绍） |
 | 销量、评价数、上架时间 | 稳定伪随机（同一件商品每次刷新数值一致），用于三种排序 |
+
+### 真实图片
+
+大部分商品用生成的 SVG 假图，**少数重点商品用真实照片**（放在 `src/assets/images/goods/`，
+来源与授权见该目录的 `README.md` / `ATTRIBUTION.json`）。
+映射关系在 `data/products.ts` 的 `REAL_PICTURES` 里，加一行「商品名 → 图片」即可增删：
+
+```ts
+const REAL_PICTURES: Record<string, string> = {
+    '智利进口车厘子2斤': cherriesPhoto,
+    '纯棉基础款圆领T恤': tshirtPhoto,
+    // ...
+};
+```
+
+有真实照片的商品，`picture` 和 `mainPictures[0]` 用照片，其余多图仍然是生成的假图。
 
 ## 四、有状态的接口
 
@@ -88,6 +106,7 @@ __resetMockDb()
 | GET | `/goods/hot` | 热销榜（`type=1` 24 小时榜 / `2` 周榜） |
 | GET | `/goods/relevant` | 猜你喜欢 |
 | POST | `/login` | 登录（任意账号，密码 ≥ 6 位） |
+| POST | `/register` | 注册（同样不校验，返回 `isNewUser: true`） |
 | GET/POST/DELETE | `/member/cart` | 购物车列表 / 加入 / 删除 |
 | POST | `/member/cart/merge` | 合并购物车 |
 | PUT | `/member/cart/selected` | 全选 / 取消全选 |
@@ -96,7 +115,15 @@ __resetMockDb()
 | GET/POST | `/member/order` | 订单列表 / 提交订单 |
 | GET | `/member/order/:id` | 订单详情 |
 | POST | `/member/order/:id/pay` | **（假接口）** 模拟支付回调 |
+| GET | `/member/address` | 收货地址列表（会员中心 - 地址管理） |
 | POST/PUT/DELETE | `/member/address(/:id)` | 新增 / 修改 / 删除收货地址 |
+| GET | `/help` | 帮助中心（6 个栏目 + 问答 + 友情链接） |
+| GET | `/about` | 关于我们（品牌故事 / 数据 / 价值观 / 发展历程） |
+| GET | `/brand` | 品牌专区（10 个品牌 + 代表商品） |
+| GET | `/topic` | 专题活动（6 个专题 + 商品） |
+
+> `/help`、`/about`、`/brand`、`/topic`、`/member/address`、`/register` 这 6 个是**本项目自拟的接口**，
+> 原项目里对应的页面是死链（footer 和顶栏上点不动），补齐后整站就没有死链了。
 
 ## 六、想换回真实接口怎么办
 

@@ -91,15 +91,17 @@ export function image(name: string, options: ImageOptions = {}): string {
     const seed = typeof options.seed === 'string' ? hashString(options.seed) : options.seed ?? hashString(name);
     const [from, to] = PALETTE[Math.abs(seed) % PALETTE.length] ?? DEFAULT_GRADIENT;
     const label = options.label ?? name;
+    /** label 传空字符串时只画纯色背景（用于做「背景图」，文字由页面自己叠加） */
+    const hasText = label.trim().length > 0;
 
     const shortSide = Math.min(width, height);
     const fontSize = Math.max(11, Math.min(56, Math.round(shortSide * 0.1)));
     const perLine = Math.max(3, Math.floor((width * 0.8) / fontSize));
-    const lines = wrapText(label, perLine, 2);
+    const lines = hasText ? wrapText(label, perLine, 2) : [];
     const lineHeight = Math.round(fontSize * 1.32);
 
     const showDecor = shortSide >= 160;
-    const subLabel = showDecor ? options.subLabel : undefined;
+    const subLabel = showDecor && hasText ? options.subLabel : undefined;
     const subFontSize = Math.max(10, Math.round(fontSize * 0.42));
     const subLineHeight = subLabel ? Math.round(subFontSize * 1.8) : 0;
 
@@ -118,12 +120,18 @@ export function image(name: string, options: ImageOptions = {}): string {
         ? `<text x="${cx}" y="${Math.round(top + lines.length * lineHeight + subFontSize * 0.9)}" font-size="${subFontSize}" fill="#ffffff" opacity="0.82">${escapeXml(subLabel)}</text>`
         : '';
 
-    const watermark = showDecor
-        ? `<text x="${cx}" y="${height - Math.round(shortSide * 0.06)}" font-size="${Math.max(10, Math.round(fontSize * 0.34))}" fill="#ffffff" opacity="0.72" letter-spacing="1">小兔鲜儿 · 假数据示例图</text>`
-        : '';
-
     const circleBig = Math.round(shortSide * 0.28);
     const circleSmall = Math.round(shortSide * 0.22);
+
+    // label 为空时不输出任何文字节点（纯背景图）
+    const textGroup = hasText
+        ? [
+              `<g font-family="${FONT_STACK}" text-anchor="middle">`,
+              `<text font-size="${fontSize}" font-weight="600" fill="#ffffff">${labelSpans}</text>`,
+              subText,
+              '</g>',
+          ]
+        : [];
 
     const svg = [
         `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">`,
@@ -136,11 +144,7 @@ export function image(name: string, options: ImageOptions = {}): string {
         '<rect width="100%" height="100%" fill="url(#bg)"/>',
         `<circle cx="${Math.round(width * 0.86)}" cy="${Math.round(height * 0.16)}" r="${circleBig}" fill="#ffffff" opacity="0.10"/>`,
         `<circle cx="${Math.round(width * 0.12)}" cy="${Math.round(height * 0.88)}" r="${circleSmall}" fill="#ffffff" opacity="0.08"/>`,
-        `<g font-family="${FONT_STACK}" text-anchor="middle">`,
-        `<text font-size="${fontSize}" font-weight="600" fill="#ffffff">${labelSpans}</text>`,
-        subText,
-        watermark,
-        '</g>',
+        ...textGroup,
         '</svg>',
     ].join('');
 

@@ -1,5 +1,5 @@
 /**
- * 用户相关假接口：登录、会员中心「猜你喜欢」
+ * 用户相关假接口：登录、注册、会员中心「猜你喜欢」
  */
 import { buildUserInfo } from '../data/seed';
 import { fail, toText, type MockContext } from '../types';
@@ -16,5 +16,15 @@ export const userRoutes = {
         if (!account) fail(400, '账号不能为空');
         if (password.length < 6) fail(400, '密码长度至少 6 位');
         return buildUserInfo(account);
+    },
+
+    /** 注册：同样不做真实校验，注册成功直接返回用户信息 */
+    'POST /register': (ctx: MockContext) => {
+        const data = ctx.data ?? {};
+        const account = toText(data.account).trim();
+        const password = toText(data.password);
+        if (!account) fail(400, '账号不能为空');
+        if (password.length < 6) fail(400, '密码长度至少 6 位');
+        return { ...buildUserInfo(account), isNewUser: true };
     },
 };

@@ -11,8 +11,8 @@
             </div>
             <!-- 右侧导航区 -->
             <div class="right">
-                <RouterLink to="/">品牌</RouterLink>
-                <RouterLink to="/">专题</RouterLink>
+                <RouterLink to="/brand">品牌</RouterLink>
+                <RouterLink to="/topic">专题</RouterLink>
             </div>
         </div>
     </div>

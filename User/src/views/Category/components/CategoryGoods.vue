@@ -16,7 +16,7 @@
         <div class="title">
             <h3>- {{ item.name }} -</h3>
             <p>温暖柔软 品质之选</p>
-            <RouterLink to="/">
+            <RouterLink :to="`/category/sub/${item.id}`">
                 查看更多<i class="iconfont icon-jinru"></i>
             </RouterLink>
         </div>
