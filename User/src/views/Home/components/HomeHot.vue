@@ -43,6 +43,7 @@
                 display: block;
                 padding: 12px;
                 border-radius: 14px;
+                border: 1px solid #f0f1f4;
                 background: #fafbfc;
                 transition: all 0.3s ease;
 
@@ -84,6 +85,7 @@
                 }
                 &:hover {
                     background: #fff;
+                    border-color: transparent;
                     box-shadow: 0 10px 26px rgba(35, 40, 56, 0.1);
                     transform: translateY(-4px);
 

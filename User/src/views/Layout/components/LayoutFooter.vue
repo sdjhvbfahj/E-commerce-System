@@ -35,7 +35,7 @@
                     <li>
                         <h4>下载APP</h4>
                         <div class="content">
-                            <div class="qr"></div>
+                            <RouterLink class="qr" to="/app" title="前往下载页"></RouterLink>
                             <div class="app-info">
                                 <p>扫描二维码</p>
                                 <p>立马下载APP</p>
@@ -58,9 +58,30 @@
             <div class="wrapper">
                 <div class="service">
                     <ul>
-                        <li><i class="iconfont icon-queren-"></i><span>价格亲民</span></li>
-                        <li><i class="iconfont icon-queren-"></i><span>物流快捷</span></li>
-                        <li><i class="iconfont icon-queren-"></i><span>品质新鲜</span></li>
+                        <!-- 三个图标各不相同：价格标签 / 物流车 / 新鲜叶子 -->
+                        <li>
+                            <svg class="s-ico" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.83 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8Z"/>
+                                <circle cx="7.6" cy="7.6" r="1.5" />
+                            </svg>
+                            <span>价格亲民</span>
+                        </li>
+                        <li>
+                            <svg class="s-ico" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M2.5 6.5h11v9h-11z"/>
+                                <path d="M13.5 9.5h4l3 3v3h-7z"/>
+                                <circle cx="6.5" cy="17.5" r="1.9"/>
+                                <circle cx="17" cy="17.5" r="1.9"/>
+                            </svg>
+                            <span>物流快捷</span>
+                        </li>
+                        <li>
+                            <svg class="s-ico" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M4.5 19.5c-1-8 4-13.5 15-13.5 1 9-5 13.5-15 13.5Z"/>
+                                <path d="M8.5 15.5c2.6-2.6 5.6-4 9-4.6"/>
+                            </svg>
+                            <span>品质新鲜</span>
+                        </li>
                     </ul>
                 </div>
                 <div class="copyright">
@@ -184,6 +205,12 @@
         background-size: cover;
         background-position: center;
         transition: all 0.25s ease;
+
+        &:hover {
+            border-color: $brandColor;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(239, 95, 42, 0.18);
+        }
     }
     .app-info {
         text-align: left;
@@ -245,19 +272,20 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 12px;
+        gap: 16px;
         flex: 1;
 
-        /* 左侧的小图标：主色圆形 + 白色对勾 */
-        .iconfont {
-            width: 26px;
-            height: 26px;
-            line-height: 26px;
-            text-align: center;
-            border-radius: 50%;
-            font-size: 13px;
-            color: #fff;
-            background-color: $brandColor;
+        /* 三个图标各不相同，用内联 SVG 画（项目里的 iconfont 只有 21 个字形，
+           没有价格/物流/叶子这三个），线稿风格 + 主色描边 */
+        .s-ico {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+            fill: none;
+            stroke: $brandColor;
+            stroke-width: 1.7;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }
         span {
             font-size: 28px;

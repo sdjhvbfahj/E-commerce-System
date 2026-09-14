@@ -4,13 +4,11 @@
         <HomeCategory/>
         <HomeBanner/>
     </div>
-    <!-- 中间两个板块 -->
-    <div class="mid">
-        <div class="wrapper">
-            <HomeNew/>
-            <HomeHot/>
-        </div>
-    </div>
+    <!-- 下面每个板块都是「整块白底 + 内层 wrapper 居中」 -->
+    <HomeNew/>
+    <HomeHot/>
+    <HomeBrand/>
+    <HomeTopic/>
     <HomeProduct/>
 </template>
 
@@ -18,6 +16,8 @@
     import HomeCategory from './components/HomeCategory.vue'
     import HomeBanner from './components/HomeBanner.vue'
     import HomeProduct from './components/HomeProduct.vue'
+    import HomeTopic from './components/HomeTopic.vue'
+    import HomeBrand from './components/HomeBrand.vue'
     import HomeHot from './components/HomeHot.vue'
     import HomeNew from './components/HomeNew.vue';
 </script>
@@ -29,14 +29,5 @@
     }
     .container {
         position: relative;
-    }
-    .mid {
-        padding-top: 20px;
-
-        .wrapper {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
     }
 </style>

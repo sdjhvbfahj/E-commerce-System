@@ -1,37 +1,35 @@
 <template>
     <div class="HomeProduct" v-for="item in goodsList" :key="item.id">
         <div class="wrapper">
-            <div class="floor">
-                <HomeProductPanel :title="item.name" :category="item.children" :cat-id="item.id">
-                    <!-- 默认插槽 -->
-                    <div class="content">
-                        <div class="left">
-                            <RouterLink :to="`/category/${item.id}`">
-                                <img v-img-lazy="item.picture">
-                                <div class="left-mask">
-                                    <p class="name">{{ item.name }}专场</p>
-                                    <p class="go">进入分类<i class="iconfont icon-jinru"></i></p>
-                                </div>
-                            </RouterLink>
-                        </div>
-                        <div class="right">
-                            <ul>
-                                <li v-for="goods in item.goods" :key="goods.id">
-                                    <GoodsItem :goods/>
-                                    <!-- 鼠标悬停出现的更多宝贝的提示页面 -->
-                                    <div class="cover">
-                                        <RouterLink :to="`/detail/${goods.id}`">
-                                            <p>找相似</p>
-                                            <p></p>
-                                            <p>发现更多宝贝<span class="iconfont icon-jinru"></span></p>
-                                        </RouterLink>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
+            <HomeProductPanel :title="item.name" :category="item.children" :cat-id="item.id">
+                <!-- 默认插槽 -->
+                <div class="content">
+                    <div class="left">
+                        <RouterLink :to="`/category/${item.id}`">
+                            <img v-img-lazy="item.picture">
+                            <div class="left-mask">
+                                <p class="name">{{ item.name }}专场</p>
+                                <p class="go">进入分类<i class="iconfont icon-jinru"></i></p>
+                            </div>
+                        </RouterLink>
                     </div>
-                </HomeProductPanel>
-            </div>
+                    <div class="right">
+                        <ul>
+                            <li v-for="goods in item.goods" :key="goods.id">
+                                <GoodsItem :goods/>
+                                <!-- 鼠标悬停出现的更多宝贝的提示页面 -->
+                                <div class="cover">
+                                    <RouterLink :to="`/detail/${goods.id}`">
+                                        <p>找相似</p>
+                                        <p></p>
+                                        <p>发现更多宝贝<span class="iconfont icon-jinru"></span></p>
+                                    </RouterLink>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </HomeProductPanel>
         </div>
     </div>
 </template>
@@ -52,20 +50,14 @@
 </script>
 
 <style scoped lang="scss">
+    /* 白色背景铺在整个楼层外层（原来模板的做法），wrapper 只负责居中 */
     .HomeProduct {
         width: 100%;
-        padding: 10px 0;
+        padding: 34px 0 30px;
 
         .wrapper {
             width: 1240px;
             margin: 0px auto;
-        }
-        /* 每个楼层一张白卡片，比原来整块纯白更有层次 */
-        .floor {
-            background-color: #fff;
-            border-radius: 16px;
-            padding: 26px 28px 28px;
-            box-shadow: 0 2px 10px rgba(35, 40, 56, 0.06);
         }
         .content {
             display: flex;
@@ -131,7 +123,8 @@
                 position: relative;
                 overflow: hidden;
                 border-radius: 14px;
-                background: #fafbfc;
+                background: #fff;
+                box-shadow: 0 2px 10px rgba(35, 40, 56, 0.06);
                 padding: 14px 16px 0;
                 transition: all 0.3s ease;
 
@@ -177,8 +170,7 @@
                     }
                 }
                 &:hover {
-                    background: #fff;
-                    box-shadow: 0 12px 28px rgba(35, 40, 56, 0.12);
+                    box-shadow: 0 12px 28px rgba(35, 40, 56, 0.14);
                     transform: translateY(-4px);
 
                     .cover {
