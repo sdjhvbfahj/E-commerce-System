@@ -95,24 +95,30 @@
 
 <style scoped lang="scss">
     .login-section {
-        background: url('@/assets/images/login-bg.png') no-repeat center / cover;
-        height: 488px;
+        /* 换成品牌色渐变（原来是绿色系的登录背景图，和新配色冲突） */
+        background:
+            radial-gradient(640px 320px at 84% 18%, rgba(255, 255, 255, 0.22), transparent 70%),
+            radial-gradient(520px 280px at 10% 86%, rgba(255, 255, 255, 0.14), transparent 70%),
+            linear-gradient(120deg, #ff9a5c 0%, #ef5f2a 52%, #d8431a 100%);
+        height: 500px;
         position: relative;
         .wrapper {
-            width: 380px;
+            width: 400px;
             background: #fff;
             position: absolute;
             left: 50%;
-            top: 54px;
+            top: 40px;
             transform: translate3d(100px, 0, 0);
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 24px 60px rgba(35, 40, 56, 0.22);
             nav {
                 font-size: 14px;
-                height: 55px;
-                margin-bottom: 20px;
-                border-bottom: 1px solid #f5f5f5;
+                height: 60px;
+                margin-bottom: 14px;
+                border-bottom: 1px solid $lineColor;
                 display: flex;
-                padding: 0 40px;
+                padding: 0 32px;
                 text-align: right;
                 align-items: center;
                 a {
@@ -131,7 +137,7 @@
             padding: 15px 40px;
             text-align: right;
             a {
-                color: $xtxColor;
+                color: $brandColor;
                 i {
                     font-size: 14px;
                 }
@@ -167,7 +173,7 @@
                         }
                         &.active,
                         &:focus {
-                            border-color: $xtxColor;
+                            border-color: $brandColor;
                         }
                     }
                     .code {
@@ -207,7 +213,7 @@
                 color: #fff;
                 text-align: center;
                 line-height: 40px;
-                background: $xtxColor;
+                background: $brandColor;
                 &.disabled {
                     background: #cfcdcd;
                 }
@@ -227,9 +233,21 @@
         }
     }
     .subBtn {
-        background: $xtxColor;
+        height: 46px;
+        border: none;
+        border-radius: 23px;
+        font-size: 16px;
+        background: $brandGradient;
+        box-shadow: $shadowBrand;
         width: 100%;
         color: #fff;
+
+        &:hover,
+        &:focus {
+            color: #fff;
+            background: $brandGradient;
+            filter: brightness(1.06);
+        }
     }
     // 假数据演示提示
     .mock-tip {

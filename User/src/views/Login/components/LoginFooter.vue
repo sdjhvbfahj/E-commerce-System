@@ -10,7 +10,7 @@
             <RouterLink to="/help?type=search">搜索推荐</RouterLink>
             <RouterLink to="/help?type=links">友情链接</RouterLink>
             </p>
-            <p>CopyRight &copy; 小兔鲜儿</p>
+            <p>CopyRight &copy; 621电商</p>
         </div>
     </footer>
 </template>

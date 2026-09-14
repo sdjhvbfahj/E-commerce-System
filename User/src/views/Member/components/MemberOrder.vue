@@ -161,12 +161,19 @@
 
     .order-item {
         margin-bottom: 20px;
-        border: 1px solid #f5f5f5;
+        border: 1px solid $lineColor;
+        border-radius: 14px;
+        overflow: hidden;
+        transition: box-shadow 0.3s;
+
+        &:hover {
+            box-shadow: 0 10px 24px rgba(35, 40, 56, 0.08);
+        }
 
         .head {
-            height: 50px;
-            line-height: 50px;
-            background: #f5f5f5;
+            height: 52px;
+            line-height: 52px;
+            background: #f7f8fa;
             padding: 0 20px;
             overflow: hidden;
 
@@ -273,7 +280,7 @@
                     width: 120px;
 
                     .green {
-                        color: $xtxColor;
+                        color: $brandColor;
                     }
                 }
 
@@ -292,7 +299,7 @@
                         display: block;
 
                         &:hover {
-                            color: $xtxColor;
+                            color: $brandColor;
                         }
                     }
                 }

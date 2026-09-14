@@ -90,7 +90,8 @@
     }
     .intro {
         background-color: #fff;
-        border-radius: 4px;
+        border-radius: 14px;
+        box-shadow: 0 2px 10px rgba(35, 40, 56, 0.06);
         padding: 30px 40px;
 
         h2 {
@@ -109,7 +110,8 @@
 
         > li {
             background-color: #fff;
-            border-radius: 4px;
+            border-radius: 14px;
+            box-shadow: 0 2px 10px rgba(35, 40, 56, 0.06);
             padding: 28px 32px 24px;
             margin-bottom: 16px;
             transition: box-shadow 0.3s;
@@ -146,8 +148,8 @@
             }
             .count {
                 font-size: 13px;
-                color: $xtxColor;
-                background: #f0faf7;
+                color: $brandColor;
+                background: #fff6f2;
                 padding: 4px 12px;
                 border-radius: 12px;
             }
@@ -169,14 +171,14 @@
                 width: 150px;
                 text-align: center;
                 padding: 10px;
-                border-radius: 4px;
+                border-radius: 14px;
                 transition: all 0.3s;
 
                 img {
                     width: 110px;
                     height: 110px;
                     object-fit: cover;
-                    border-radius: 4px;
+                    border-radius: 14px;
                 }
                 .g-name {
                     margin-top: 10px;
@@ -189,7 +191,7 @@
                     color: $priceColor;
                 }
                 &:hover {
-                    background: #f7fbfa;
+                    background: #fff8f5;
                 }
             }
         }
@@ -215,8 +217,8 @@
         justify-content: space-between;
         margin: 20px 0;
         padding: 34px 40px;
-        border-radius: 4px;
-        background: linear-gradient(90deg, #27ba9b 0%, #1dc779 100%);
+        border-radius: 14px;
+        background: linear-gradient(90deg, #ef5f2a 0%, #12b76a 100%);
         color: #fff;
 
         h3 {
@@ -236,12 +238,12 @@
             :deep(.el-button--primary) {
                 background: #fff;
                 border-color: #fff;
-                color: $xtxColor;
+                color: $brandColor;
 
                 &:hover {
                     background: #fff;
                     border-color: #fff;
-                    color: $xtxColor;
+                    color: $brandColor;
                     opacity: 0.88;
                 }
             }

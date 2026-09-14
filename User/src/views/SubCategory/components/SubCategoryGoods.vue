@@ -1,10 +1,13 @@
 <template>
     <div class="SubCategoryGoods">
-        <el-tabs v-model="requestData.sortField" class="demo-tabs" @tab-change="tabChange">
-            <el-tab-pane label="最新商品" name="publishTime"></el-tab-pane>
-            <el-tab-pane label="最高人气" name="orderNum"></el-tab-pane>
-            <el-tab-pane label="评论最多" name="evaluateNum"></el-tab-pane>
-        </el-tabs>
+        <div class="head">
+            <p class="label">排序方式</p>
+            <el-tabs v-model="requestData.sortField" class="demo-tabs" @tab-change="tabChange">
+                <el-tab-pane label="最新商品" name="publishTime"></el-tab-pane>
+                <el-tab-pane label="最高人气" name="orderNum"></el-tab-pane>
+                <el-tab-pane label="评论最多" name="evaluateNum"></el-tab-pane>
+            </el-tabs>
+        </div>
         <!-- 无线加载v-infinite-scroll -->
         <div class="goods" v-infinite-scroll="road" :infinite-scroll-disabled="disabled">
             <ul>
@@ -12,6 +15,7 @@
                     <GoodsItem :goods="item"/>
                 </li>
             </ul>
+            <el-empty v-if="disabled && !subCategoryList.items?.length" description="这个分类下暂时没有商品" />
         </div>
     </div>
 </template>
@@ -44,33 +48,71 @@
 <style scoped lang="scss">
     .SubCategoryGoods {
         background-color: #fff;
-        padding: 10px 25px;
-        .demo-tabs > .el-tabs__content {
-            padding: 32px;
-            color: #6b778c;
-            font-size: 32px;
-            font-weight: 600;
+        border-radius: 16px;
+        box-shadow: $shadowSm;
+        padding: 18px 26px 30px;
+
+        .head {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid $lineColor;
+
+            .label {
+                margin-right: 12px;
+                font-size: 13px;
+                color: $inkColor3;
+            }
+            .demo-tabs {
+                flex: 1;
+
+                :deep(.el-tabs__header) {
+                    margin: 0;
+                }
+                :deep(.el-tabs__nav-wrap::after) {
+                    display: none;
+                }
+                :deep(.el-tabs__item) {
+                    height: 54px;
+                    line-height: 54px;
+                    font-size: 14px;
+                    color: $inkColor2;
+
+                    &.is-active {
+                        color: $brandColor;
+                        font-weight: 500;
+                    }
+                }
+                :deep(.el-tabs__active-bar) {
+                    height: 3px;
+                    border-radius: 2px;
+                    background: $brandGradient;
+                }
+            }
         }
         .goods {
             width: 100%;
-            margin-top: 20px;
+            margin-top: 22px;
+
             ul {
-                display: flex;
-                justify-content: flex-start;
-                flex-wrap: wrap;
+                display: grid;
+                grid-template-columns: repeat(5, 1fr);
+                gap: 16px;
+
                 li {
-                    margin: 0px 9px;
-                    width: 220px;
-                    height: 300px;
                     :deep(a) {
+                        display: block;
                         position: relative;
                         top: 0px;
-                        padding: 15px 30px;
+                        padding: 16px 24px 22px;
                         text-align: center;
-                        transition: all 0.3s;
+                        border-radius: 14px;
+                        background: #fafbfc;
+                        transition: all 0.3s ease;
+
                         &:hover {
-                            top: -3px;
-                            box-shadow: 0px 2px 6px 2px rgba(0, 0, 0, 0.2);
+                            top: -4px;
+                            background: #fff;
+                            box-shadow: 0 12px 26px rgba(35, 40, 56, 0.1);
                         }
                     }
                     :deep(a .info h4) {
@@ -79,8 +121,8 @@
                         overflow: hidden;
                     }
                     :deep(a .info p) {
-                        color: #999;
-                        font-size: 14px;
+                        color: $inkColor3;
+                        font-size: 13px;
                     }
                 }
             }

@@ -34,7 +34,7 @@ export interface CatSeed {
     subs: SubSeed[];
 }
 
-/** 10 个一级分类、23 个二级分类、138 件商品 —— 参考小兔鲜的分类结构 */
+/** 10 个一级分类、23 个二级分类、138 件商品 —— 对齐主流生鲜电商的分类结构 */
 export const CATALOG: CatSeed[] = [
     {
         name: '居家',

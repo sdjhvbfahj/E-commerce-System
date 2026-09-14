@@ -26,7 +26,9 @@
         margin-top: 20px;
         .wrapper {
             background: #fff;
-            padding: 0 20px;
+            border-radius: 16px;
+            box-shadow: 0 2px 10px rgba(35, 40, 56, 0.06);
+            padding: 0 28px 10px;
         }
     }
 </style>

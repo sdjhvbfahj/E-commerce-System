@@ -42,6 +42,8 @@
 <style scoped lang="scss">
     .pay-info {
         background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 2px 10px rgba(35, 40, 56, 0.06);
         display: flex;
         align-items: center;
         height: 240px;
@@ -49,7 +51,7 @@
 
         .green {
             font-size: 80px;
-            color: #1dc779;
+            color: #12b76a;
         }
         .red {
             font-size: 80px;

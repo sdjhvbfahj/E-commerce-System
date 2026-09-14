@@ -12,7 +12,7 @@
             <!-- 顶部下载区 -->
             <section class="hero">
                 <div class="text">
-                    <p class="badge">小兔鲜儿 App</p>
+                    <p class="badge">621电商 App</p>
                     <h1>把整间超市<br>装进口袋</h1>
                     <p class="desc">
                         扫码下载 App，新人首单立减 20 元。<br>
@@ -101,7 +101,7 @@
 
     // 手机模型里展示的假商品（纯装饰）
     const previewGoods = [
-        { name: '智利车厘子', price: '¥129.00', color: '#5dd1b4' },
+        { name: '智利车厘子', price: '¥129.00', color: '#ffb27a' },
         { name: '纯棉圆领T恤', price: '¥89.00', color: '#f5b8d8' },
         { name: '无线蓝牙耳机', price: '¥299.00', color: '#8cc6ff' },
         { name: '日式餐具套装', price: '¥129.00', color: '#ffd08a' },
@@ -132,8 +132,8 @@
         align-items: center;
         gap: 60px;
         padding: 50px 60px;
-        border-radius: 4px;
-        background: linear-gradient(120deg, #f0faf7 0%, #ffffff 55%);
+        border-radius: 14px;
+        background: linear-gradient(120deg, #fff6f2 0%, #ffffff 55%);
         overflow: hidden;
 
         .text {
@@ -143,8 +143,8 @@
                 display: inline-block;
                 padding: 4px 14px;
                 font-size: 13px;
-                color: $xtxColor;
-                background: #dff5ef;
+                color: $brandColor;
+                background: #ffe6da;
                 border-radius: 14px;
             }
             h1 {
@@ -174,7 +174,7 @@
                         height: 120px;
                         object-fit: cover;
                         border: 1px solid #eee;
-                        border-radius: 6px;
+                        border-radius: 12px;
                         background: #fff;
                         padding: 4px;
                     }
@@ -273,7 +273,7 @@
 
             .iconfont {
                 font-size: 15px;
-                color: #27ba9b;
+                color: #ef5f2a;
             }
             .searchbar {
                 flex: 1;
@@ -290,7 +290,7 @@
             margin: 0 14px;
             height: 74px;
             border-radius: 10px;
-            background: linear-gradient(120deg, #27ba9b 0%, #1dc779 100%);
+            background: linear-gradient(120deg, #ef5f2a 0%, #12b76a 100%);
             color: #fff;
             font-size: 14px;
             display: flex;
@@ -337,7 +337,7 @@
             color: #999;
 
             .on {
-                color: #27ba9b;
+                color: #ef5f2a;
             }
         }
     }
@@ -345,7 +345,8 @@
     .features {
         margin-top: 20px;
         background-color: #fff;
-        border-radius: 4px;
+        border-radius: 14px;
+        box-shadow: 0 2px 10px rgba(35, 40, 56, 0.06);
         padding: 40px;
 
         h2 {
@@ -363,12 +364,12 @@
                 flex: 1;
                 padding: 26px 22px;
                 border: 1px solid #f2f2f2;
-                border-radius: 6px;
+                border-radius: 12px;
                 transition: all 0.3s;
 
                 .iconfont {
                     font-size: 28px;
-                    color: $xtxColor;
+                    color: $brandColor;
                 }
                 h4 {
                     margin-top: 14px;
@@ -383,7 +384,7 @@
                     color: #999;
                 }
                 &:hover {
-                    border-color: $xtxColor;
+                    border-color: $brandColor;
                 }
             }
         }
@@ -396,7 +397,8 @@
         margin: 20px 0;
         padding: 28px 40px;
         background-color: #fff;
-        border-radius: 4px;
+        border-radius: 14px;
+        box-shadow: 0 2px 10px rgba(35, 40, 56, 0.06);
 
         h3 {
             font-size: 20px;

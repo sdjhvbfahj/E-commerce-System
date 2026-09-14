@@ -34,51 +34,70 @@
     .HomeProductPanel {
         width: 100%;
         height: 100%;
+
         .top {
-            height: 125px;
-            padding: 40px 0px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding-bottom: 20px;
+
             .left {
                 h3 {
-                    margin-left: 6px;
-                    font-size: 32px;
-                    font-weight: 400;
+                    position: relative;
+                    padding-left: 14px;
+                    font-size: 22px;
+                    font-weight: 500;
+                    color: $inkColor;
+
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        left: 0;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        width: 4px;
+                        height: 20px;
+                        border-radius: 2px;
+                        background: $brandGradient;
+                    }
                 }
             }
             .right {
                 ul {
                     display: flex;
+                    align-items: center;
+
                     li {
                         .category {
                             display: block;
-                            padding: 2px 10px;
-                            margin: 0px 1px;
-                            font-size: 16px;
-                            border-radius: 5px;
+                            padding: 6px 14px;
+                            margin: 0px 2px;
+                            font-size: 13px;
+                            border-radius: 15px;
+                            color: $inkColor2;
+                            background: #f5f6f8;
+                            transition: all 0.25s;
+
                             &:hover {
-                                background-color: $xtxColor;
                                 color: #fff;
+                                background: $brandColor;
                             }
                         }
                     }
                 }
                 .more {
-                    line-height: 26px;
-                    font-size: 16px;
-                    color: #999;
-                    margin-left: 60px;
-                    margin-right: 4px;
+                    margin-left: 18px;
+                    font-size: 13px;
+                    color: $inkColor3;
+
+                    .iconfont {
+                        font-size: 12px;
+                    }
                     &:hover {
-                        color: $xtxColor;
+                        color: $brandColor;
                     }
                 }
             }
-        }
-        .bottom {
-            width: 100%;
-            height: 600px;
         }
     }
 </style>

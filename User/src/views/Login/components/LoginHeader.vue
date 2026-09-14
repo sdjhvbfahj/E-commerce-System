@@ -2,7 +2,7 @@
     <header class="login-header">
         <div class="container m-top-20">
             <h1 class="logo">
-                <RouterLink to="/">小兔鲜</RouterLink>
+                <RouterLink to="/">621电商</RouterLink>
             </h1>
             <RouterLink class="entry" to="/">
                 进入网站首页
@@ -33,7 +33,7 @@
                 height: 132px;
                 width: 100%;
                 text-indent: -9999px;
-                background: url("@/assets/images/logo.png") no-repeat center 18px / contain;
+                background: url("@/assets/images/logo.svg") no-repeat center 18px / contain;
             }
         }
         .sub {
@@ -50,7 +50,7 @@
             font-size: 16px;
             i {
                 font-size: 14px;
-                color: $xtxColor;
+                color: $brandColor;
                 letter-spacing: -5px;
             }
         }

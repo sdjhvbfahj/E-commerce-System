@@ -105,23 +105,30 @@
     .goods-info {
         min-height: 600px;
         background: #fff;
+        border-radius: 16px;
+        box-shadow: $shadowSm;
         display: flex;
+        padding: 24px;
         .media {
-            width: 580px;
+            width: 520px;
             height: 600px;
-            padding: 30px 50px;
+            padding: 4px 0 0 0;
         }
         .spec {
             flex: 1;
-            padding: 30px 30px 30px 0;
+            padding: 4px 0 0 40px;
         }
     }
     .g-name {
         font-size: 22px;
+        font-weight: 500;
+        color: $inkColor;
+        line-height: 32px;
     }
     .g-desc {
-        color: #999;
+        color: $inkColor3;
         margin-top: 10px;
+        font-size: 14px;
     }
     .g-price {
         margin-top: 10px;
@@ -143,31 +150,32 @@
         }
     }
     .g-service {
-        background: #f5f5f5;
-        width: 500px;
-        padding: 20px 10px 0 10px;
-        margin-top: 10px;
+        background: #f7f8fa;
+        width: 100%;
+        padding: 20px 16px 0 16px;
+        margin-top: 16px;
+        border-radius: 12px;
         dl {
             padding-bottom: 20px;
             display: flex;
             align-items: center;
             dt {
                 width: 50px;
-                color: #999;
+                color: $inkColor3;
             }
             dd {
-                color: #666;
+                color: $inkColor2;
                 &:last-child {
                     span {
                         margin-right: 10px;
                         &::before {
                             content: "•";
-                            color: $xtxColor;
+                            color: $brandColor;
                             margin-right: 2px;
                         }
                     }
                     a {
-                        color: $xtxColor;
+                        color: $brandColor;
                     }
                 }
             }
@@ -175,10 +183,13 @@
     }
 .goods-sales {
     display: flex;
-    width: 400px;
+    width: 460px;
     align-items: center;
     text-align: center;
     height: 140px;
+    margin-top: 8px;
+    border-radius: 14px;
+    background: #fafbfc;
     li {
         flex: 1;
         position: relative;
@@ -202,12 +213,12 @@
                 color: #666;
                 margin-top: 10px;
                 i {
-                    color: $xtxColor;
+                    color: $brandColor;
                     font-size: 14px;
                     margin-right: 2px;
                 }
                 &:hover {
-                    color: $xtxColor;
+                    color: $brandColor;
                     cursor: pointer;
                 }
             }
@@ -216,5 +227,25 @@
 }
 .btn {
     margin-top: 20px;
+    height: 50px;
+    padding: 0 46px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    color: #fff;
+    background: $brandGradient;
+    box-shadow: $shadowBrand;
+    transition: all 0.25s;
+
+    &:hover,
+    &:focus {
+        color: #fff;
+        background: $brandGradient;
+        filter: brightness(1.06);
+        transform: translateY(-1px);
+    }
+}
+:deep(.el-input-number) {
+    width: 132px;
 }
 </style>

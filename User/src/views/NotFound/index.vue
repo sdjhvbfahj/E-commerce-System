@@ -67,7 +67,8 @@
         gap: 60px;
         min-height: 480px;
         background-color: #fff;
-        border-radius: 4px;
+        border-radius: 14px;
+        box-shadow: 0 2px 10px rgba(35, 40, 56, 0.06);
         padding: 60px 40px;
     }
     .pic {
@@ -79,7 +80,7 @@
         align-items: center;
         justify-content: center;
         border-radius: 50%;
-        background: #f0faf7;
+        background: #fff6f2;
 
         img {
             width: 200px;
@@ -96,7 +97,7 @@
             font-weight: 700;
             line-height: 1;
             letter-spacing: 6px;
-            color: $xtxColor;
+            color: $brandColor;
             opacity: 0.35;
         }
     }
@@ -118,7 +119,7 @@
             margin-top: 18px;
             padding: 10px 14px;
             background: #f7f7f7;
-            border-radius: 4px;
+            border-radius: 14px;
             font-size: 13px;
             color: #666;
             word-break: break-all;
@@ -134,7 +135,8 @@
     .recommend {
         margin-top: 20px;
         background-color: #fff;
-        border-radius: 4px;
+        border-radius: 14px;
+        box-shadow: 0 2px 10px rgba(35, 40, 56, 0.06);
         padding: 24px 40px 30px;
 
         h3 {
@@ -154,7 +156,7 @@
                 height: 48px;
                 padding: 0 22px;
                 border: 1px solid #e4e4e4;
-                border-radius: 4px;
+                border-radius: 14px;
                 color: #666;
                 transition: all 0.3s;
 
@@ -162,8 +164,8 @@
                     font-size: 13px;
                 }
                 &:hover {
-                    border-color: $xtxColor;
-                    color: $xtxColor;
+                    border-color: $brandColor;
+                    color: $brandColor;
                 }
             }
         }

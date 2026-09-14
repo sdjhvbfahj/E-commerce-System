@@ -1,12 +1,15 @@
 <template>
     <div class="HomeHot">
-        <HomePanel title="人气推荐" subtitle="人气爆款 不容错过">
+        <HomePanel title="人气推荐" subtitle="人气爆款 不容错过" more-path="/brand">
             <ul>
-                <li v-for="item in hotList" :key="item.id">
+                <li v-for="(item, index) in hotList" :key="item.id">
                     <RouterLink :to="`/detail/${item.id}`">
-                        <img v-img-lazy="item.picture">
-                        <h3>{{ item.title }}</h3>
-                        <p>{{ item.alt }}</p>
+                        <div class="pic">
+                            <img v-img-lazy="item.picture">
+                            <span class="badge">HOT {{ index + 1 }}</span>
+                        </div>
+                        <h3 class="ellipsis">{{ item.title }}</h3>
+                        <p class="alt ellipsis">{{ item.alt }}</p>
                     </RouterLink>
                 </li>
             </ul>
@@ -31,44 +34,62 @@
 
 <style scoped lang="scss">
     ul {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        height: 406px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+
         li {
-            width: 306px;
-            height: 100%;
             a {
-                position: relative;
-                top: 0px;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                width: 100%;
-                height: 100%;
-                background-color: #fff;
-                transition: all 0.6s;
-                img {
-                    width: 306px;
-                    height: 306px;
+                display: block;
+                padding: 12px;
+                border-radius: 14px;
+                background: #fafbfc;
+                transition: all 0.3s ease;
+
+                .pic {
+                    position: relative;
+                    border-radius: 10px;
+                    overflow: hidden;
+                    background: #f0f1f4;
+
+                    img {
+                        display: block;
+                        width: 100%;
+                        aspect-ratio: 1 / 1;
+                        object-fit: cover;
+                        transition: transform 0.5s ease;
+                    }
+                    .badge {
+                        position: absolute;
+                        left: 10px;
+                        top: 10px;
+                        padding: 2px 10px;
+                        border-radius: 10px;
+                        font-size: 12px;
+                        color: #fff;
+                        background: rgba(35, 40, 56, 0.72);
+                        backdrop-filter: blur(4px);
+                    }
                 }
                 h3 {
-                    text-align: center;
-                    width: 100%;
-                    font-size: 22px;
-                    padding: 10px 16px;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
+                    margin-top: 14px;
+                    font-size: 15px;
                     font-weight: 400;
+                    color: $inkColor;
                 }
-                p {
-                    color: #999;
-                    font-size: 18px;
+                .alt {
+                    margin-top: 6px;
+                    font-size: 13px;
+                    color: $inkColor3;
                 }
                 &:hover {
-                    top: -6px;
-                    box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.2);
+                    background: #fff;
+                    box-shadow: 0 10px 26px rgba(35, 40, 56, 0.1);
+                    transform: translateY(-4px);
+
+                    .pic img {
+                        transform: scale(1.05);
+                    }
                 }
             }
         }

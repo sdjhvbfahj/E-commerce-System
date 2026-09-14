@@ -10,12 +10,12 @@ html {
 
 body {
   height: 100%;
-  color: #333;
+  color: $inkColor;
   min-width: 1240px;
   font: 1em/1.4 'Microsoft Yahei', 'PingFang SC', 'Avenir', 'Segoe UI',
     'Hiragino Sans GB', 'STHeiti', 'Microsoft Sans Serif', 'WenQuanYi Micro Hei',
     sans-serif;
-  background-color: #eee;
+  background-color: $bgColor;
 }
 
 body,
@@ -66,7 +66,7 @@ ul {
 }
 
 #app {
-  background: #f5f5f5;
+  background: transparent;
   user-select: none;
 }
 
@@ -111,4 +111,89 @@ ul {
 // reset element
 .el-breadcrumb__inner.is-link {
   font-weight: 400 !important;
+}
+
+// ==========================================================================
+// 621电商 · 全局公共样式
+// ==========================================================================
+
+a {
+  transition: color 0.25s ease;
+}
+
+::selection {
+  background: rgba(239, 95, 42, 0.18);
+}
+
+// 细滚动条
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: #d9dce3;
+  border-radius: 8px;
+
+  &:hover {
+    background: #c3c7d1;
+  }
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+// 页面主容器（比原来的 .container 多一点左右留白语义，尺寸保持一致）
+.es-container {
+  width: 1240px;
+  margin: 0 auto;
+  position: relative;
+}
+
+// 通用白卡片
+.es-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(35, 40, 56, 0.06);
+}
+
+// 通用区块标题：主色竖条 + 标题 + 副标题 + 右侧“更多”
+.es-panel-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+
+  .title {
+    position: relative;
+    padding-left: 14px;
+    font-size: 22px;
+    font-weight: 500;
+    color: #232838;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 4px;
+      height: 20px;
+      border-radius: 2px;
+      background: linear-gradient(180deg, #ff8a4c, #ef5f2a);
+    }
+  }
+
+  .subtitle {
+    margin-left: 12px;
+    font-size: 13px;
+    color: #9aa0b0;
+  }
+
+  .more {
+    font-size: 13px;
+    color: #9aa0b0;
+
+    &:hover {
+      color: #ef5f2a;
+    }
+  }
 }

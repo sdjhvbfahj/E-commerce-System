@@ -1,47 +1,55 @@
 <template>
     <div class='cartList'>
-        <!-- 购物车列表 -->
-        <table class="cartListInfo">
-            <thead>
-                <tr>
-                    <th>
-                        <el-checkbox class="cart-chenckbox" :modelValue="cartStore.allSelected" @change="(selected:boolean) => allSelectedChangge(selected)"/>全选
-                    </th>
-                    <th>商品信息</th>
-                    <th>单价</th>
-                    <th>数量</th>
-                    <th>小计</th>
-                    <th>操作</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="item in cartStore.cartList" :key="item.id">
-                    <td>
-                        <!-- 使用:modelValue和@change替代v-model语法糖, 方便后续调用接口 -->
-                        <el-checkbox class="cart-chenckbox" :modelValue="item.selected" @change="(selected:boolean) => singleChange(item, selected)"/>
-                    </td>
-                    <td>
+        <!-- 表头 -->
+        <div class="cart-head">
+            <div class="col check">
+                <el-checkbox class="cart-chenckbox" :modelValue="cartStore.allSelected" @change="(selected:boolean) => allSelectedChangge(selected)"/>全选
+            </div>
+            <div class="col goods">商品信息</div>
+            <div class="col price">单价</div>
+            <div class="col count">数量</div>
+            <div class="col subtotal">小计</div>
+            <div class="col action">操作</div>
+        </div>
+
+        <!-- 商品列表 -->
+        <ul class="cart-body">
+            <li v-for="item in cartStore.cartList" :key="item.id">
+                <div class="col check">
+                    <!-- 使用:modelValue和@change替代v-model语法糖, 方便后续调用接口 -->
+                    <el-checkbox class="cart-chenckbox" :modelValue="item.selected" @change="(selected:boolean) => singleChange(item, selected)"/>
+                </div>
+                <div class="col goods">
+                    <div class="thumb">
                         <img v-img-lazy="item.picture">
-                        <div class="goodsInfo">
-                            <h4>{{ item.name }}</h4>
-                        </div>
-                    </td>
-                    <td>￥{{ item.price }}</td>
-                    <td>
-                        <el-input-number :modelValue="item.count" @change="countChange(item.skuId, item.selected, $event)" :min="1"/>
-                    </td>
-                    <td>￥{{ (Number(item.price) * item.count).toFixed(2) }}</td>
-                    <!-- 功能按钮 -->
-                    <td>
-                        <a href="javascript:;" @click="cartStore.deleteCart(item.skuId)">删除</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                    </div>
+                    <div class="goodsInfo">
+                        <h4 class="ellipsis-2">{{ item.name }}</h4>
+                        <p class="attr ellipsis">{{ item.attrsText }}</p>
+                    </div>
+                </div>
+                <div class="col price">￥{{ item.price }}</div>
+                <div class="col count">
+                    <el-input-number :modelValue="item.count" @change="countChange(item.skuId, item.selected, $event)" :min="1"/>
+                </div>
+                <div class="col subtotal">￥{{ (Number(item.price) * item.count).toFixed(2) }}</div>
+                <!-- 功能按钮 -->
+                <div class="col action">
+                    <a href="javascript:;" @click="cartStore.deleteCart(item.skuId)">
+                        <i class="iconfont icon-shanchu"></i>删除
+                    </a>
+                </div>
+            </li>
+        </ul>
+
+        <el-empty v-if="!cartStore.cartList?.length" description="购物车还是空的，去挑几件好物吧">
+            <el-button type="primary" @click="$router.push('/')">去逛逛</el-button>
+        </el-empty>
+
         <!-- 渲染总信息 -->
         <div class="settlement">
             <div class="left">
-                <span>共 {{ cartStore.cartCount }} 件商品，已选择 {{ cartStore.selectedCount }} 件，商品合计：<i>￥{{ (cartStore.selectedPrice).toFixed(2) }}</i></span>
+                <span>共 <b>{{ cartStore.cartCount }}</b> 件商品，已选择 <b>{{ cartStore.selectedCount }}</b> 件，商品合计：<i>￥{{ (cartStore.selectedPrice).toFixed(2) }}</i></span>
             </div>
             <div class="right">
                 <button @click="$router.push('/checkout')">下单结算</button>
@@ -70,132 +78,160 @@
 </script>
 
 <style scoped lang="scss">
-    .cartListInfo {
-        width: 100%;
-        margin-top: 10px;
+    // 列表用 grid 排，六个栏位宽度统一，表头和行对齐
+    @mixin cart-grid {
+        display: grid;
+        grid-template-columns: 108px minmax(0, 1fr) 150px 170px 150px 110px;
+        align-items: center;
+    }
+
+    .cartList {
+        margin-top: 4px;
         background-color: #fff;
-        thead {
-            height: 70px;
-            color: #666;
-            // border-bottom: 1px solid #f5f5f5;
-            tr {
-                th {
-                    font-size: 16px;
+        border-radius: 16px;
+        box-shadow: $shadowSm;
+        overflow: hidden;
+    }
+    .cart-head {
+        @include cart-grid;
+        height: 60px;
+        padding: 0 24px;
+        background: #f7f8fa;
+        font-size: 14px;
+        color: $inkColor2;
+        border-bottom: 1px solid $lineColor;
+
+        .check {
+            display: flex;
+            align-items: center;
+            color: $inkColor3;
+        }
+    }
+    .cart-body {
+        padding: 0 24px;
+
+        li {
+            @include cart-grid;
+            padding: 20px 0;
+            border-bottom: 1px dashed $lineColor;
+            transition: background 0.25s;
+
+            &:last-child {
+                border-bottom: none;
+            }
+            &:hover {
+                background: #fcfcfd;
+            }
+        }
+        .check {
+            display: flex;
+            align-items: center;
+        }
+        .goods {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            min-width: 0;
+
+            .thumb {
+                width: 84px;
+                height: 84px;
+                flex-shrink: 0;
+                border-radius: 12px;
+                overflow: hidden;
+                background: #f5f6f8;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+            .goodsInfo {
+                min-width: 0;
+                flex: 1;
+
+                h4 {
+                    font-size: 15px;
                     font-weight: 400;
-                    line-height: 70px;
-                    .el-checkbox {
-                        height: 20px;
-                        margin-right: 4px;
-                        margin-bottom: 3px;
-                        vertical-align: middle;
-                    }
-                    &:first-child {
-                        color: #999;
-                        width: 120px;
-                        text-align: start;
-                        padding-left: 40px;
-                    }
-                    &:nth-child(2) {
-                        width: 400px;
-                    }
-                    &:nth-child(3) {
-                        width: 220px;
-                    }
-                    &:nth-child(4) {
-                        width: 180px;
-                    }
-                    &:nth-child(5) {
-                        width: 180px;
-                    }
-                    &:last-child {
-                        width: 140px;
-                    }
+                    color: $inkColor;
+                    line-height: 22px;
+                }
+                .attr {
+                    margin-top: 6px;
+                    font-size: 12px;
+                    color: $inkColor3;
                 }
             }
         }
-        tbody {
-            height: 120px;
-            color: #666;
-            tr {
-                td {
-                    font-size: 16px;
-                    font-weight: 400;
-                    text-align: center;
-                    line-height: 100px;
-                    &:first-child {
-                        color: #999;
-                        text-align: start;
-                        padding-left: 40px;
-                    }
-                    &:nth-child(2) {
-                        display: flex;
-                        width: 100%;
-                        height: 100%;
-                        padding: 10px;
-                        img {
-                            width: 100px;
-                            height: 100px;
-                            margin-right: 10px;
-                        }
-                        .goodsInfo {
-                            h4 {
-                                text-align: start;
-                                width: 260px;
-                                font-weight: 400;
-                                font-size: 16px;
-                                white-space: nowrap;
-                                overflow: hidden;
-                                text-overflow: ellipsis;
-                            }
-                        }
-                    }
-                    &:nth-child(3) {
-                        font-size: 14px;
-                    }
-                    &:last-child {
-                        a {
-                            font-size: 14px;
-                            color: $xtxColor;
-                        }
-                    }
-                }
+        .price {
+            font-size: 14px;
+            color: $inkColor2;
+        }
+        .subtotal {
+            font-size: 16px;
+            font-weight: 500;
+            color: $priceColor;
+        }
+        .action a {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 13px;
+            color: $inkColor3;
+
+            .iconfont {
+                font-size: 13px;
+            }
+            &:hover {
+                color: $helpColor;
             }
         }
     }
+    /* 结算栏 */
     .settlement {
-        margin-top: 20px;
-        background-color: #fff;
-        width: 100%;
-        height: 80px;
+        position: sticky;
+        bottom: 0;
         display: flex;
+        align-items: center;
         justify-content: space-between;
+        padding: 0 24px 0 40px;
+        height: 88px;
+        background: #fff;
+        border-top: 1px solid $lineColor;
+        box-shadow: 0 -6px 18px rgba(35, 40, 56, 0.05);
+
         .left {
-            padding-left: 40px;
-            font-size: 16px;
-            flex: 1;
-            display: flex;
-            align-items: center;
+            font-size: 14px;
+            color: $inkColor2;
+
+            b {
+                font-weight: 500;
+                color: $brandColor;
+                padding: 0 2px;
+            }
             i {
                 color: $priceColor;
-                font-weight: 700;
+                font-style: normal;
+                font-weight: 600;
+                font-size: 22px;
             }
         }
-        .right {
-            flex: 1;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            padding-right: 30px;
-            button {
-                width: 180px;
-                height: 50px;
-                background-color: $xtxColor;
-                outline: none;
-                border: 0px solid #000;
-                color: #fff;
-                font-size: 16px;
-                border-radius: 6px;
-                cursor: pointer;
+        .right button {
+            width: 180px;
+            height: 50px;
+            border: none;
+            cursor: pointer;
+            color: #fff;
+            font-size: 16px;
+            border-radius: 25px;
+            background: $brandGradient;
+            box-shadow: $shadowBrand;
+            transition: all 0.25s;
+
+            &:hover {
+                filter: brightness(1.05);
+                transform: translateY(-1px);
             }
         }
     }
@@ -203,6 +239,7 @@
         width: 16px;
         height: 16px;
         border-width: 1px;
-        border-color: #999;
+        border-color: #c8ccd4;
+        border-radius: 5px;
     }
 </style>

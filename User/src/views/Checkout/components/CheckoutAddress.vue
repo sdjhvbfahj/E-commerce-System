@@ -150,7 +150,7 @@
             }
 
             >a {
-                color: $xtxColor;
+                color: $brandColor;
                 width: 160px;
                 text-align: center;
                 height: 90px;
@@ -214,12 +214,12 @@
             }
         }
         &.active {
-            border: 1px solid $xtxColor;
-            background-color: #e6faf6;
+            border: 1px solid $brandColor;
+            background-color: #fff2ec;
         }
         &:hover {
-            border: 1px solid $xtxColor;
-            background-color: #e6faf6;
+            border: 1px solid $brandColor;
+            background-color: #fff2ec;
             .iconfont {
                 position: relative;
                 left: 0px;

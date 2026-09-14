@@ -43,37 +43,48 @@
 
 <style scoped lang="scss">
     .home-overview {
-        height: 132px;
-        background: url(@/assets/images/center-bg.png) no-repeat center / cover;
+        position: relative;
+        height: 148px;
         display: flex;
+        background:
+            radial-gradient(520px 220px at 88% 12%, rgba(255, 255, 255, 0.2), transparent 70%),
+            linear-gradient(120deg, #ff9a5c 0%, #ef5f2a 55%, #d8431a 100%);
 
         .user-meta {
+            position: relative;
+            z-index: 1;
             flex: 1;
             display: flex;
             align-items: center;
 
             .avatar {
-                width: 85px;
-                height: 85px;
+                width: 84px;
+                height: 84px;
                 border-radius: 50%;
                 overflow: hidden;
-                margin-left: 60px;
+                margin-left: 48px;
+                border: 3px solid rgba(255, 255, 255, 0.7);
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
 
                 img {
                     width: 100%;
                     height: 100%;
+                    object-fit: cover;
                 }
             }
 
             h4 {
-                padding-left: 26px;
-                font-size: 18px;
-                font-weight: normal;
+                padding-left: 22px;
+                font-size: 19px;
+                font-weight: 500;
                 color: white;
+                letter-spacing: 0.5px;
             }
         }
 
         .item {
+            position: relative;
+            z-index: 1;
             flex: 1;
             display: flex;
             align-items: center;

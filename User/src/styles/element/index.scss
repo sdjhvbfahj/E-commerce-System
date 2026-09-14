@@ -1,25 +1,32 @@
 /* 只需要重写你需要的即可 */
-@forward 'element-plus/theme-chalk/src/common/var.scss' with(
+@forward 'element-plus/theme-chalk/src/common/var.scss' with (
     $colors: (
-        'primary':(
+        'primary': (
             // 主色
-            'base': #27ba9a,
+            'base': #ef5f2a,
         ),
-        'success':(
+        'success': (
             // 成功色
-            'base': #1dc779,
+            'base': #12b76a,
         ),
-        'warning':(
+        'warning': (
             // 警告色
-            'base': #ffb302,
+            'base': #f79009,
         ),
-        'danger':(
+        'danger': (
             // 危险色
-            'base': #e26237,
+            'base': #f04438,
         ),
-        'error':(
-            // 成功色
-            'base': #cf4444,
+        'error': (
+            // 错误色
+            'base': #f04438,
         ),
+    ),
+    // 整体圆角调大一点，和新的卡片风格统一
+    $border-radius: (
+        'base': 10px,
+        'small': 8px,
+        'round': 24px,
+        'circle': 100%,
     )
-)
+);

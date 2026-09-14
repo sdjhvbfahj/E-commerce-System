@@ -1,5 +1,74 @@
-$xtxColor: #27ba9b;
-$helpColor: #e26237;
-$sucColor: #1dc779;
-$warnColor: #ffb302;
-$priceColor: #cf4444;
+// ==========================================================================
+// 621电商 · 设计变量
+// --------------------------------------------------------------------------
+// 这个文件通过 vite 的 additionalData 注入到每个 <style lang="scss"> 里，
+// 所以组件中可以直接使用下面的变量和 mixin，不用 import。
+// 注意：这里只能放变量 / mixin / function，不要写会产出 CSS 的规则。
+// ==========================================================================
+
+// ---------- 品牌色 ----------
+$brandColor: #ef5f2a; // 主色（暖橙红）
+$brandColorDark: #d34a17; // 主色-深（hover / 按压）
+$brandColorLight: #ff8a4c; // 主色-浅（渐变起点）
+$brandColorSoft: #fff2ec; // 主色-极浅（标签底色）
+$brandGradient: linear-gradient(120deg, #ff8a4c 0%, #ef5f2a 55%, #e8451a 100%);
+
+// ---------- 功能色 ----------
+$sucColor: #12b76a;
+$warnColor: #f79009;
+$helpColor: #f04438;
+$priceColor: #ef3f1a;
+
+// ---------- 中性色 ----------
+$inkColor: #232838; // 标题 / 主文字
+$inkColor2: #5a6072; // 正文 / 次要文字
+$inkColor3: #9aa0b0; // 辅助说明文字
+$lineColor: #eceef2; // 分割线 / 边框
+$bgColor: #f5f6f8; // 页面底色
+
+// ---------- 圆角与阴影 ----------
+$radiusSm: 8px;
+$radiusMd: 12px;
+$radiusLg: 18px;
+$shadowSm: 0 2px 10px rgba(35, 40, 56, 0.06);
+$shadowMd: 0 10px 28px rgba(35, 40, 56, 0.1);
+$shadowBrand: 0 8px 20px rgba(239, 95, 42, 0.28);
+
+// ---------- 常用 mixin ----------
+// 统一的白卡片
+@mixin card($radius: $radiusMd) {
+    background: #fff;
+    border-radius: $radius;
+    box-shadow: $shadowSm;
+}
+
+// 卡片悬浮反馈
+@mixin card-hover($lift: -4px) {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+        transform: translateY($lift);
+        box-shadow: $shadowMd;
+    }
+}
+
+// 区块标题（左侧一小段主色竖条 + 标题）
+@mixin section-title {
+    position: relative;
+    padding-left: 14px;
+    font-size: 22px;
+    font-weight: 500;
+    color: $inkColor;
+
+    &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 4px;
+        height: 20px;
+        border-radius: 2px;
+        background: $brandGradient;
+    }
+}

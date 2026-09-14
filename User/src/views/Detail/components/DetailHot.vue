@@ -26,38 +26,53 @@
 
 <style scoped lang="scss">
 .goods-hot {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(35, 40, 56, 0.06);
+
     h3 {
-        height: 70px;
-        background: $helpColor;
+        height: 60px;
+        background: $brandGradient;
         color: #fff;
-        font-size: 18px;
-        line-height: 70px;
-        padding-left: 25px;
-        font-weight: normal;
+        font-size: 17px;
+        line-height: 60px;
+        padding-left: 22px;
+        font-weight: 500;
+        letter-spacing: 0.5px;
     }
     .goods {
         display: flex;
         flex-direction: column;
         width: 100%;
+        padding: 8px 8px 12px;
+        background: #fff;
+
         li {
-            width: 280px;
-            height: 340px;
-            margin-top: 10px;
+            width: 100%;
+            padding: 14px 0;
+            border-bottom: 1px dashed $lineColor;
+
+            &:last-child {
+                border-bottom: none;
+            }
             :deep(a) {
                 position: relative;
                 top: 0px;
-                padding: 15px 40px;
+                display: block;
                 text-align: center;
-                transition: all 0.7s;
+                transition: all 0.4s ease;
                 background-color: #fff;
-                border: 2px solid #fff;
+                border-radius: 12px;
+                padding: 8px 0;
+
                 &:hover {
-                    border: 2px solid $xtxColor;
+                    background-color: #fafbfc;
+                    transform: translateY(-4px);
                 }
             }
             :deep(a .pic img) {
-                width: 200px;
-                height: 200px;
+                width: 160px;
+                height: 160px;
             }
             :deep(a .info h4) {
                 white-space: nowrap;
@@ -65,8 +80,8 @@
                 overflow: hidden;
             }
             :deep(a .info p) {
-                color: #999;
-                font-size: 14px;
+                color: $inkColor3;
+                font-size: 13px;
             }
         }
     }

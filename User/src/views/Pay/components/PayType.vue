@@ -50,7 +50,10 @@
     .pay-type {
         margin-top: 20px;
         background-color: #fff;
+        border-radius: 16px;
+        box-shadow: 0 2px 10px rgba(35, 40, 56, 0.06);
         padding-bottom: 70px;
+        overflow: hidden;
 
         p {
             line-height: 70px;
@@ -59,7 +62,7 @@
             font-size: 16px;
 
             &.head {
-                border-bottom: 1px solid #f5f5f5;
+                border-bottom: 1px solid $lineColor;
             }
         }
 
@@ -70,12 +73,13 @@
             text-align: center;
             line-height: 48px;
             margin-left: 30px;
-            color: #666666;
+            border-radius: 12px;
+            color: $inkColor2;
             display: inline-block;
 
             &.active,
             &:hover {
-                border-color: $xtxColor;
+                border-color: $brandColor;
             }
 
             &.alipay {

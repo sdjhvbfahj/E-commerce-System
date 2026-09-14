@@ -120,12 +120,12 @@
                 width: 450px;
                 padding: 20px;
                 border: 1px solid #ebebeb;
-                border-radius: 4px;
+                border-radius: 14px;
                 transition: all 0.3s;
 
                 &.active {
-                    border-color: $xtxColor;
-                    background: #f9fdfc;
+                    border-color: $brandColor;
+                    background: #fff8f5;
                 }
                 &:hover {
                     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
@@ -155,7 +155,7 @@
             .default {
                 font-size: 12px;
                 color: #fff;
-                background: $xtxColor;
+                background: $brandColor;
                 border-radius: 3px;
                 padding: 1px 8px;
             }

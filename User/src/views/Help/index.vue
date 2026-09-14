@@ -179,7 +179,8 @@
         width: 240px;
         flex-shrink: 0;
         background-color: #fff;
-        border-radius: 4px;
+        border-radius: 14px;
+        box-shadow: 0 2px 10px rgba(35, 40, 56, 0.06);
         padding-bottom: 20px;
         height: fit-content;
 
@@ -209,8 +210,8 @@
                 }
                 &:hover,
                 &.active {
-                    color: $xtxColor;
-                    background: #f3fbf9;
+                    color: $brandColor;
+                    background: #fff6f2;
 
                     .iconfont {
                         opacity: 1;
@@ -221,8 +222,8 @@
         .contact {
             margin: 10px 20px 0;
             padding: 18px 16px;
-            background: #f0faf7;
-            border-radius: 4px;
+            background: #fff6f2;
+            border-radius: 14px;
             text-align: center;
 
             .title {
@@ -232,7 +233,7 @@
             .phone {
                 margin-top: 6px;
                 font-size: 20px;
-                color: $xtxColor;
+                color: $brandColor;
                 font-weight: 600;
             }
             .time {
@@ -247,7 +248,8 @@
         flex: 1;
         min-width: 0;
         background-color: #fff;
-        border-radius: 4px;
+        border-radius: 14px;
+        box-shadow: 0 2px 10px rgba(35, 40, 56, 0.06);
         padding: 24px 30px 34px;
 
         .hot {
@@ -271,7 +273,7 @@
 
                 &:hover {
                     color: #fff;
-                    background: $xtxColor;
+                    background: $brandColor;
                 }
             }
         }
@@ -320,7 +322,7 @@
                 color: #666;
             }
             :deep(.el-collapse-item__header.is-active .q) {
-                color: $xtxColor;
+                color: $brandColor;
             }
         }
         .links {
@@ -333,7 +335,7 @@
                 width: 250px;
                 padding: 20px;
                 border: 1px solid #f0f0f0;
-                border-radius: 4px;
+                border-radius: 14px;
                 transition: all 0.3s;
 
                 h4 {
@@ -350,7 +352,7 @@
                 }
                 .go {
                     font-size: 13px;
-                    color: $xtxColor;
+                    color: $brandColor;
 
                     .iconfont {
                         font-size: 12px;
@@ -358,7 +360,7 @@
                     }
                 }
                 &:hover {
-                    border-color: $xtxColor;
+                    border-color: $brandColor;
                     box-shadow: 0 4px 12px rgba(39, 186, 155, 0.12);
                 }
             }
@@ -368,8 +370,8 @@
             justify-content: space-between;
             margin-top: 30px;
             padding: 22px 24px;
-            background: #fafafa;
-            border-radius: 4px;
+            background: #fafbfc;
+            border-radius: 14px;
 
             .item {
                 display: flex;
@@ -378,7 +380,7 @@
 
                 .iconfont {
                     font-size: 26px;
-                    color: $xtxColor;
+                    color: $brandColor;
                 }
                 h4 {
                     font-size: 15px;

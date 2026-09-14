@@ -11,7 +11,7 @@
 
             <!-- 品牌头图 -->
             <section class="hero">
-                <img :src="aboutData?.cover" alt="小兔鲜儿">
+                <img :src="aboutData?.cover" alt="621电商">
                 <div class="mask">
                     <h1>{{ aboutData?.name }}</h1>
                     <p class="slogan">{{ aboutData?.slogan }}</p>
@@ -125,9 +125,9 @@
     .hero {
         position: relative;
         height: 420px;
-        border-radius: 4px;
+        border-radius: 14px;
         overflow: hidden;
-        background: #dff3ee;
+        background: #ffe9df;
 
         > img {
             width: 100%;
@@ -144,7 +144,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: rgba(0, 0, 0, 0.42);
+            background: rgba(35, 40, 56, 0.32);
             color: #fff;
             text-align: center;
 
@@ -173,7 +173,8 @@
         display: flex;
         margin-top: 20px;
         background-color: #fff;
-        border-radius: 4px;
+        border-radius: 14px;
+        box-shadow: 0 2px 10px rgba(35, 40, 56, 0.06);
         padding: 34px 0;
 
         .stat {
@@ -186,7 +187,7 @@
             }
             .value {
                 font-size: 32px;
-                color: $xtxColor;
+                color: $brandColor;
                 font-weight: 600;
                 line-height: 1;
             }
@@ -203,7 +204,8 @@
         gap: 40px;
         margin-top: 20px;
         background-color: #fff;
-        border-radius: 4px;
+        border-radius: 14px;
+        box-shadow: 0 2px 10px rgba(35, 40, 56, 0.06);
         padding: 44px 40px;
 
         .text {
@@ -226,7 +228,7 @@
         .pic {
             width: 460px;
             flex-shrink: 0;
-            border-radius: 4px;
+            border-radius: 14px;
             overflow: hidden;
 
             img {
@@ -241,7 +243,8 @@
     .values {
         margin-top: 20px;
         background-color: #fff;
-        border-radius: 4px;
+        border-radius: 14px;
+        box-shadow: 0 2px 10px rgba(35, 40, 56, 0.06);
         padding: 44px 40px 50px;
 
         h2 {
@@ -259,13 +262,13 @@
                 flex: 1;
                 text-align: center;
                 padding: 30px 22px;
-                background: #fafafa;
-                border-radius: 6px;
+                background: #fafbfc;
+                border-radius: 12px;
                 transition: all 0.3s;
 
                 .iconfont {
                     font-size: 34px;
-                    color: $xtxColor;
+                    color: $brandColor;
                 }
                 h4 {
                     margin-top: 14px;
@@ -281,7 +284,7 @@
                     text-align: left;
                 }
                 &:hover {
-                    background: #f0faf7;
+                    background: #fff6f2;
                     transform: translateY(-4px);
                 }
             }
@@ -291,7 +294,8 @@
     .milestones {
         margin-top: 20px;
         background-color: #fff;
-        border-radius: 4px;
+        border-radius: 14px;
+        box-shadow: 0 2px 10px rgba(35, 40, 56, 0.06);
         padding: 44px 40px;
 
         h2 {
@@ -327,7 +331,7 @@
                     text-align: right;
                     font-size: 22px;
                     font-weight: 600;
-                    color: $xtxColor;
+                    color: $brandColor;
                     line-height: 26px;
                 }
                 .dot {
@@ -338,7 +342,7 @@
                     height: 11px;
                     border-radius: 50%;
                     background: #fff;
-                    border: 3px solid $xtxColor;
+                    border: 3px solid $brandColor;
                 }
                 .content {
                     padding-left: 60px;
@@ -362,7 +366,8 @@
     .contact {
         margin-top: 20px;
         background-color: #fff;
-        border-radius: 4px;
+        border-radius: 14px;
+        box-shadow: 0 2px 10px rgba(35, 40, 56, 0.06);
         padding: 44px 40px 50px;
 
         h2 {

@@ -1,31 +1,37 @@
 <template>
     <div class="HomeProduct" v-for="item in goodsList" :key="item.id">
         <div class="wrapper">
-            <HomeProductPanel :title="item.name" :category="item.children" :cat-id="item.id">
-                <!-- 默认插槽 -->
-                <div class="content">
-                    <div class="left">
-                        <RouterLink :to="`/category/${item.id}`">
-                            <img v-img-lazy="item.picture">
-                        </RouterLink>
-                    </div>
-                    <div class="right">
-                        <ul>
-                            <li v-for="goods in item.goods" :key="goods.id">
-                                <GoodsItem :goods/>
-                                <!-- 鼠标悬停出现的更多宝贝的提示页面 -->
-                                <div class="cover">
-                                    <RouterLink :to="`/detail/${goods.id}`">
-                                        <p>找相似</p>
-                                        <p></p>
-                                        <p>发现更多宝贝<span class="iconfont icon-jinru"></span></p>
-                                    </RouterLink>
+            <div class="floor">
+                <HomeProductPanel :title="item.name" :category="item.children" :cat-id="item.id">
+                    <!-- 默认插槽 -->
+                    <div class="content">
+                        <div class="left">
+                            <RouterLink :to="`/category/${item.id}`">
+                                <img v-img-lazy="item.picture">
+                                <div class="left-mask">
+                                    <p class="name">{{ item.name }}专场</p>
+                                    <p class="go">进入分类<i class="iconfont icon-jinru"></i></p>
                                 </div>
-                            </li>
-                        </ul>
+                            </RouterLink>
+                        </div>
+                        <div class="right">
+                            <ul>
+                                <li v-for="goods in item.goods" :key="goods.id">
+                                    <GoodsItem :goods/>
+                                    <!-- 鼠标悬停出现的更多宝贝的提示页面 -->
+                                    <div class="cover">
+                                        <RouterLink :to="`/detail/${goods.id}`">
+                                            <p>找相似</p>
+                                            <p></p>
+                                            <p>发现更多宝贝<span class="iconfont icon-jinru"></span></p>
+                                        </RouterLink>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-            </HomeProductPanel>
+                </HomeProductPanel>
+            </div>
         </div>
     </div>
 </template>
@@ -47,89 +53,136 @@
 
 <style scoped lang="scss">
     .HomeProduct {
-        height: 725px;
         width: 100%;
-        background-color: #fff;
+        padding: 10px 0;
+
         .wrapper {
             width: 1240px;
             margin: 0px auto;
-            height: 100%;
-            .content {
-                display: flex;
-                justify-content: space-between;
-                height: 600px;
-                .left {
-                    width: 248px;
-                    height: 610px;
+        }
+        /* 每个楼层一张白卡片，比原来整块纯白更有层次 */
+        .floor {
+            background-color: #fff;
+            border-radius: 16px;
+            padding: 26px 28px 28px;
+            box-shadow: 0 2px 10px rgba(35, 40, 56, 0.06);
+        }
+        .content {
+            display: flex;
+            gap: 20px;
+        }
+        /* 左侧大图卡 */
+        .left {
+            width: 268px;
+            height: 596px;
+            flex-shrink: 0;
+            border-radius: 14px;
+            overflow: hidden;
+
+            a {
+                position: relative;
+                display: block;
+                width: 100%;
+                height: 100%;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    transition: transform 0.6s ease;
+                }
+                .left-mask {
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    padding: 46px 22px 22px;
+                    color: #fff;
+                    background: linear-gradient(180deg, rgba(35, 40, 56, 0) 0%, rgba(35, 40, 56, 0.72) 100%);
+
+                    .name {
+                        font-size: 20px;
+                        font-weight: 500;
+                    }
+                    .go {
+                        margin-top: 8px;
+                        font-size: 13px;
+                        opacity: 0.85;
+
+                        .iconfont {
+                            font-size: 12px;
+                            margin-left: 4px;
+                        }
+                    }
+                }
+                &:hover img {
+                    transform: scale(1.06);
+                }
+            }
+        }
+        /* 右侧商品格 */
+        .right ul {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: 291px;
+            gap: 14px;
+
+            li {
+                position: relative;
+                overflow: hidden;
+                border-radius: 14px;
+                background: #fafbfc;
+                padding: 14px 16px 0;
+                transition: all 0.3s ease;
+
+                .cover {
+                    position: absolute;
+                    left: 0px;
+                    bottom: -78px;
+                    width: 100%;
+                    height: 78px;
+                    background: $brandGradient;
+                    transition: all 0.4s ease;
+
                     a {
                         display: block;
                         width: 100%;
                         height: 100%;
-                        img {
-                            width: 610px;
-                            height: 610px;
-                            object-fit: cover;
-                            object-position: center;
+                        text-align: center;
+
+                        p:first-child {
+                            margin: 13px 0px 5px;
+                            font-size: 16px;
+                            color: #fff;
+                        }
+                        p:nth-child(2) {
+                            display: block;
+                            margin: 3px auto;
+                            width: 90px;
+                            height: 1px;
+                            background-color: rgba(255, 255, 255, 0.7);
+                        }
+                        p:last-child {
+                            display: block;
+                            margin-top: 5px;
+                            font-size: 12px;
+                            color: #fff;
+
+                            .iconfont {
+                                vertical-align: middle;
+                                font-size: 12px;
+                                color: #fff;
+                            }
                         }
                     }
                 }
-                .right ul {
-                    width: 968px;
-                    height: 600px;
-                    display: flex;
-                    flex-wrap: wrap;
-                    li {
-                        position: relative;
-                        overflow: hidden;
-                        border: 2px solid #fff;
-                        padding: 12px 21px 0px;
-                        width: 242px;
-                        height: 300px;
-                        transition: all 0.5s;
-                        .cover {
-                            position: absolute;
-                            left: 0px;
-                            bottom: -84px;
-                            width: 242px;
-                            height: 84px;
-                            background-color: #00BE9A;
-                            transition: all 0.5s;
-                            a {
-                                display: block;
-                                width: 100%;
-                                height: 100%;
-                                text-align: center;
-                                p:first-child {
-                                    margin: 15px 0px 6px;
-                                    font-size: 18px;
-                                    color: #fff;
-                                }
-                                p:nth-child(2) {
-                                    display: block;
-                                    margin: 3px auto;
-                                    width: 100px;
-                                    height: 1px;
-                                    background-color: #fff;
-                                }
-                                p:last-child {
-                                    display: block;
-                                    margin-top: 6px;
-                                    font-size: 13px;
-                                    color: #fff;
-                                    .iconfont {
-                                        vertical-align: middle;
-                                        font-size: 13px;
-                                        color: #fff;
-                                    }
-                                }
-                            }
-                        }
-                        &:hover .cover {
-                            bottom: 0px;
-                        }
-                        &:hover {
-                            border: 2px solid #00be9a;
-                        }
+                &:hover {
+                    background: #fff;
+                    box-shadow: 0 12px 28px rgba(35, 40, 56, 0.12);
+                    transform: translateY(-4px);
+
+                    .cover {
+                        bottom: 0px;
                     }
                 }
             }

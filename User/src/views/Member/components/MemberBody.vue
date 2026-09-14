@@ -29,67 +29,71 @@
 <style scoped lang="scss">
     .container {
         display: flex;
+        gap: 20px;
         padding-top: 20px;
 
         .xtx-member-aside {
             width: 220px;
-            margin-right: 20px;
-            border-radius: 2px;
+            flex-shrink: 0;
+            border-radius: 16px;
+            overflow: hidden;
             background-color: #fff;
+            box-shadow: 0 2px 10px rgba(35, 40, 56, 0.06);
+            height: fit-content;
 
             .user-manage {
                 background-color: #fff;
+                padding-bottom: 12px;
 
                 h4 {
-                    font-size: 18px;
-                    font-weight: 400;
-                    padding: 20px 52px 5px;
-                    border-top: 1px solid #f6f6f6;
+                    font-size: 15px;
+                    font-weight: 500;
+                    color: $inkColor;
+                    padding: 20px 24px 10px;
+
+                    &:not(:first-child) {
+                        margin-top: 8px;
+                        border-top: 1px solid $lineColor;
+                    }
                 }
 
                 .links {
-                    padding: 0 52px 10px;
+                    padding: 0 12px;
                 }
 
                 a {
                     display: block;
                     line-height: 1;
-                    padding: 15px 0;
+                    padding: 13px 14px;
+                    margin-bottom: 4px;
+                    border-radius: 10px;
                     font-size: 14px;
-                    color: #666;
+                    color: $inkColor2;
                     position: relative;
+                    transition: all 0.25s;
 
                     &:hover {
-                        color: $xtxColor;
+                        color: $brandColor;
+                        background: $brandColorSoft;
                     }
 
                     &.active,
                     &.router-link-exact-active {
-                        color: $xtxColor;
-
-                        &:before {
-                            display: block;
-                        }
-                    }
-
-                    &:before {
-                        content: '';
-                        display: none;
-                        width: 6px;
-                        height: 6px;
-                        border-radius: 50%;
-                        position: absolute;
-                        top: 19px;
-                        left: -16px;
-                        background-color: $xtxColor;
+                        color: #fff;
+                        background: $brandGradient;
+                        box-shadow: 0 6px 14px rgba(239, 95, 42, 0.24);
                     }
                 }
             }
         }
 
         .article {
-            width: 1000px;
+            flex: 1;
+            min-width: 0;
             background-color: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 10px rgba(35, 40, 56, 0.06);
+            overflow: hidden;
         }
     }
 </style>

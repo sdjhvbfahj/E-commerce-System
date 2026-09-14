@@ -18,16 +18,16 @@
     const {category} = useCategory();
 </script>
 
-<style scoped>
+<style scoped lang="scss">
     .wrapper {
         width: 1240px;
         margin: 0px auto;
+        padding-top: 4px;
     }
     .Category {
         .banner {
             position: relative;
             width: 100%;
-            height: 500px;
         }
     }
 </style>

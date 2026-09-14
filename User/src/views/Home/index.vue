@@ -1,10 +1,24 @@
 <template>
-    <div class="container wrapper">
-        <HomeCategory/>
-        <HomeBanner/>
+    <!-- 首屏：左边分类（白卡片） + 右边轮播（原版是分类压在轮播上的绝对定位） -->
+    <div class="hero">
+        <div class="wrapper">
+            <div class="hero-aside">
+                <HomeCategory/>
+            </div>
+            <div class="hero-main">
+                <HomeBanner/>
+            </div>
+        </div>
     </div>
-    <HomeNew/>
-    <HomeHot/>
+
+    <!-- 中间商品区 -->
+    <div class="mid">
+        <div class="wrapper">
+            <HomeNew/>
+            <HomeHot/>
+        </div>
+    </div>
+
     <HomeProduct/>
 </template>
 
@@ -18,10 +32,37 @@
 
 <style scoped lang="scss">
     .wrapper {
-            width: 1240px;
-            margin: 0px auto;
+        width: 1240px;
+        margin: 0px auto;
+    }
+    .hero {
+        padding-top: 22px;
+
+        .wrapper {
+            display: flex;
+            align-items: stretch;
+            gap: 18px;
         }
-    .container {
+    }
+    .hero-aside {
+        width: 244px;
+        flex-shrink: 0;
         position: relative;
+        z-index: 2;
+    }
+    .hero-main {
+        flex: 1;
+        min-width: 0;
+        position: relative;
+        z-index: 1;
+    }
+    .mid {
+        padding-top: 10px;
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
     }
 </style>

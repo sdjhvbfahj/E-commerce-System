@@ -132,22 +132,28 @@
 
 <style scoped lang="scss">
     .register-section {
-        background: url('@/assets/images/login-bg.png') no-repeat center / cover;
+        /* 和登录页保持同一套品牌渐变 */
+        background:
+            radial-gradient(640px 320px at 84% 18%, rgba(255, 255, 255, 0.22), transparent 70%),
+            radial-gradient(520px 280px at 10% 86%, rgba(255, 255, 255, 0.14), transparent 70%),
+            linear-gradient(120deg, #ff9a5c 0%, #ef5f2a 52%, #d8431a 100%);
         height: 640px;
         position: relative;
         .wrapper {
-            width: 420px;
+            width: 430px;
             background: #fff;
             position: absolute;
             left: 50%;
             top: 40px;
             transform: translate3d(30px, 0, 0);
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 24px 60px rgba(35, 40, 56, 0.22);
             nav {
                 font-size: 14px;
-                height: 55px;
-                margin-bottom: 20px;
-                border-bottom: 1px solid #f5f5f5;
+                height: 60px;
+                margin-bottom: 14px;
+                border-bottom: 1px solid $lineColor;
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
@@ -165,7 +171,7 @@
                     a {
                         display: inline;
                         font-size: 13px;
-                        color: $xtxColor;
+                        color: $brandColor;
                     }
                 }
             }
@@ -176,7 +182,7 @@
             }
         }
         .subBtn {
-            background: $xtxColor;
+            background: $brandColor;
             width: 100%;
             color: #fff;
         }

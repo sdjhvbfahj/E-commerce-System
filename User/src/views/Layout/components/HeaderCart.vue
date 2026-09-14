@@ -1,43 +1,50 @@
 <template>
     <el-popover
         placement="bottom-end"
-        :width="440"
+        :width="420"
         trigger="hover"
-        :popper-style="{ padding: '10px 0px 0px', '--el-popover-padding': '0'}"
+        :popper-style="{ padding: '0', '--el-popover-padding': '0', borderRadius: '14px' }"
     >
-    <div class="content">
-        <div class="cartContent">
-            <div class="cartGoods" v-for="item in cartStore.cartList" :key="item.id">
-                <div class="left">
-                    <img v-img-lazy="item.picture">
+        <div class="content">
+            <div class="cartContent">
+                <div class="cartGoods" v-for="item in cartStore.cartList" :key="item.id">
+                    <div class="left">
+                        <img v-img-lazy="item.picture">
+                    </div>
+                    <div class="center">
+                        <h4>{{item.name}}</h4>
+                        <p>{{item.attrsText}}</p>
+                    </div>
+                    <div class="right">
+                        <p class="price">￥{{ item.price }}</p>
+                        <p class="count">x{{ item.count }}</p>
+                    </div>
+                    <div class="delete">
+                        <i class="iconfont icon-close" @click="cartStore.deleteCart(item.skuId)"></i>
+                    </div>
                 </div>
-                <div class="center">
-                    <h4>{{item.name}}</h4>
-                    <p>{{item.attrsText}}</p>
+                <!-- 空购物车 -->
+                <div class="empty" v-if="!cartStore.cartList?.length">
+                    <i class="iconfont icon-3"></i>
+                    <p>购物车还是空的，去挑几件好物吧</p>
+                    <RouterLink to="/">去逛逛</RouterLink>
+                </div>
+            </div>
+            <div class="totalPrice">
+                <div class="left">
+                    <p class="sum">共 {{ cartStore.cartCount }} 件商品</p>
+                    <p class="price">￥{{ (cartStore.cartTotalPrice).toFixed(2) }}</p>
                 </div>
                 <div class="right">
-                    <p class="price">￥{{ item.price }}</p>
-                    <p class="count">x{{ item.count }}</p>
-                </div>
-                <div class="delete">
-                    <i class="iconfont icon-close" @click="cartStore.deleteCart(item.skuId)"></i>
+                    <RouterLink to="/cart">去结算</RouterLink>
                 </div>
             </div>
         </div>
-        <div class="totalPrice">
-            <div class="left">
-                <p class="sum">共 {{ cartStore.cartCount }} 件商品</p>
-                <p class="price">￥{{ (cartStore.cartTotalPrice).toFixed(2) }}</p>
-            </div>
-            <div class="right">
-                <RouterLink to="/cart">去购物车结算</RouterLink>
-            </div>
-        </div>
-    </div>
         <template #reference>
             <div class="cart" @click="$router.push('/cart')">
                 <i class="iconfont icon-3"></i>
-                <p>{{ cartStore.cartCount }}</p>
+                <span class="txt">购物车</span>
+                <span class="badge">{{ cartStore.cartCount }}</span>
             </div>
         </template>
     </el-popover>
@@ -50,58 +57,95 @@
 </script>
 
 <style scoped lang="scss">
+    /* 触发按钮：胶囊样式 */
     .cart {
         position: relative;
-        margin-left: 15px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        height: 46px;
+        padding: 0 18px;
+        border-radius: 23px;
         cursor: pointer;
+        background: $brandColorSoft;
+        color: $brandColor;
+        transition: all 0.25s;
+
+        .iconfont {
+            font-size: 20px;
+        }
+        .txt {
+            font-size: 15px;
+        }
+        .badge {
+            min-width: 20px;
+            height: 20px;
+            padding: 0 6px;
+            border-radius: 10px;
+            background: $brandColor;
+            color: #fff;
+            font-size: 12px;
+            line-height: 20px;
+            text-align: center;
+        }
+        &:hover {
+            background: $brandColor;
+            color: #fff;
+
+            .badge {
+                background: #fff;
+                color: $brandColor;
+            }
+        }
     }
-    .cart .iconfont {
-        margin-top: 2px;
-        font-size: 26px;
-    }
-    .cart p {
-        display: block;
-        padding: 1px 5px;
-        border-radius: 50%;
-        background-color: red;
-        position: absolute;
-        top: -5px;
-        left: 14px;
-        color: #fff;
-    }
+    /* 弹出层内容 */
     .content {
         width: 100%;
-        height: 390px;
+        border-radius: 14px;
+        overflow: hidden;
+        background: #fff;
+
         .cartContent {
             width: 100%;
-            height: 310px;
+            max-height: 312px;
             overflow: auto;
-            padding-left: 10px;
-            padding-right: 10px;
+            padding: 6px 14px;
+
             .cartGoods {
+                position: relative;
                 width: 100%;
-                height: 100px;
+                padding: 12px 0;
                 display: flex;
-                justify-content: space-evenly;
                 align-items: center;
+                gap: 12px;
                 cursor: pointer;
-                border-bottom: 1px solid #eee;
-                &:first-child {
-                    border-top: 1px solid #eee;
+                border-bottom: 1px dashed $lineColor;
+
+                &:last-child {
+                    border-bottom: none;
                 }
                 .left {
-                    width: 80px;
-                    height: 80px;
+                    width: 64px;
+                    height: 64px;
+                    flex-shrink: 0;
+                    border-radius: 10px;
+                    overflow: hidden;
+                    background: #f5f6f8;
+
                     img {
                         width: 100%;
                         height: 100%;
+                        object-fit: cover;
                     }
                 }
                 .center {
-                    width: 180px;
+                    flex: 1;
+                    min-width: 0;
+
                     h4 {
-                        font-size: 16px;
+                        font-size: 14px;
                         font-weight: 400;
+                        color: $inkColor;
                         overflow: hidden;
                         text-overflow: ellipsis;
                         display: -webkit-box;
@@ -110,87 +154,104 @@
                         -webkit-box-orient: vertical;
                     }
                     p {
-                        font-size: 14px;
-                        color: #999;
+                        margin-top: 4px;
+                        font-size: 12px;
+                        color: $inkColor3;
                         overflow: hidden;
                         text-overflow: ellipsis;
-                        display: -webkit-box;
-                        line-clamp: 2;
-                        -webkit-line-clamp: 2;
-                        -webkit-box-orient: vertical;
+                        white-space: nowrap;
                     }
                 }
                 .right {
-                    width: 80px;
-                    text-align: center;
+                    width: 76px;
+                    text-align: right;
+
                     .price {
-                        margin-bottom: 10px;
-                        font-size: 16px;
+                        font-size: 15px;
                         color: $priceColor;
                     }
                     .count {
-                        font-size: 16px;
-                        color: #999;
+                        margin-top: 4px;
+                        font-size: 13px;
+                        color: $inkColor3;
                     }
                 }
                 .delete {
                     width: 16px;
                     height: 16px;
-                    margin-right: 10px;
+
                     i {
                         display: none;
                         width: 16px;
                         height: 16px;
                         line-height: 16px;
                         font-size: 16px;
-                        color: #999;
+                        color: $inkColor3;
+
                         &:hover {
-                            background: #f8f8f8;
+                            color: $helpColor;
                         }
                     }
                 }
-                &:hover {
-                    .delete i {
-                        display: block;
-                    }
+                &:hover .delete i {
+                    display: block;
+                }
+            }
+            .empty {
+                padding: 34px 0 26px;
+                text-align: center;
+
+                .iconfont {
+                    font-size: 34px;
+                    color: #dfe2e9;
+                }
+                p {
+                    margin: 12px 0 14px;
+                    font-size: 13px;
+                    color: $inkColor3;
+                }
+                a {
+                    display: inline-block;
+                    padding: 7px 22px;
+                    border-radius: 16px;
+                    font-size: 13px;
+                    color: #fff;
+                    background: $brandGradient;
                 }
             }
         }
         .totalPrice {
             width: 100%;
-            height: 80px;
+            height: 72px;
             display: flex;
             align-items: center;
-            background-color: #f8f8f8;
-            border-radius: 10px;
+            justify-content: space-between;
+            padding: 0 18px;
+            background: #fafbfc;
+            border-top: 1px solid $lineColor;
+
             .left {
-                flex: 3;
-                padding-left: 20px;
                 .sum {
-                    font-size: 16px;
-                    color: #999;
-                    padding-left: 3px;
+                    font-size: 13px;
+                    color: $inkColor3;
                 }
                 .price {
-                    margin-top: 2px;
+                    margin-top: 4px;
                     font-size: 18px;
                     color: $priceColor;
                 }
             }
             .right {
-                flex: 1;
                 a {
                     display: block;
-                    width: 180px;
-                    height: 50px;
-                    border: 1px solid $xtxColor;
-                    margin-right: 10px;
-                    text-align: center;
-                    line-height: 50px;
-                    font-size: 18px;
-                    color: $xtxColor;
-                    background: #e6faf6;
-                    border-radius: 10px;
+                    height: 40px;
+                    line-height: 40px;
+                    padding: 0 22px;
+                    border-radius: 20px;
+                    font-size: 14px;
+                    color: #fff;
+                    background: $brandGradient;
+                    box-shadow: $shadowBrand;
                 }
             }
         }

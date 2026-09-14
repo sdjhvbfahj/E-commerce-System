@@ -63,10 +63,15 @@
         width: 100%;
         height: 400px;
         display: flex;
+
         .left {
             width: 400px;
             height: 100%;
             position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #f5f6f8;
+
             &:hover {
                 .layer {
                     display: block;
@@ -76,9 +81,10 @@
                 }
             }
             img {
-                background: #eee;
+                background: #f5f6f8;
                 width: 100%;
                 height: 100%;
+                object-fit: cover;
             }
             .layer {
                 display: none;
@@ -87,7 +93,9 @@
                 top: 0px;
                 width: 200px;
                 height: 200px;
-                background-color: rgba(0, 0, 0, 0.2);
+                border-radius: 10px;
+                background-color: rgba(239, 95, 42, 0.18);
+                border: 1px solid rgba(239, 95, 42, 0.5);
                 cursor: move;
             }
             .largeImg {
@@ -97,9 +105,11 @@
                 left: 416px;
                 width: 400px;
                 height: 400px;
-                box-shadow: 0px 0px 6px 3px rgba(0, 0, 0, 0.1);
+                border-radius: 16px;
+                overflow: hidden;
+                box-shadow: 0 18px 40px rgba(35, 40, 56, 0.18);
                 z-index: 998;
-                background: #eee;
+                background: #f5f6f8;
             }
         }
         .right {
@@ -112,15 +122,29 @@
                 justify-content: space-between;
                 width: 100%;
                 height: 100%;
+
                 li {
                     cursor: pointer;
                     width: 64px;
                     height: 64px;
+                    border-radius: 12px;
+                    overflow: hidden;
+                    border: 2px solid transparent;
+                    background: #f5f6f8;
+                    transition: all 0.25s;
+
                     &.active {
-                        border: 2px solid $xtxColor;
+                        border-color: $brandColor;
+                        box-shadow: 0 6px 14px rgba(239, 95, 42, 0.25);
+                    }
+                    &:hover {
+                        border-color: rgba(239, 95, 42, 0.45);
                     }
                     img {
-                        background: #eee;
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        background: #f5f6f8;
                     }
                 }
             }

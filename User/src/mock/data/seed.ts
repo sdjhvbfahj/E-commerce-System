@@ -80,7 +80,7 @@ export interface OrderRecord {
 
 /** 登录后返回的用户信息（任意账号都能登录，方便演示） */
 export function buildUserInfo(account: string): UserInfoRecord {
-    const name = account || '小兔鲜用户';
+    const name = account || '621电商用户';
     return {
         account: name,
         avatar: image(name, { width: 120, height: 120, seed: 66, label: name.slice(0, 2) }),

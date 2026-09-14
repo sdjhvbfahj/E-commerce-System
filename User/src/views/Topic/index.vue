@@ -77,7 +77,8 @@
     }
     .intro {
         background-color: #fff;
-        border-radius: 4px;
+        border-radius: 14px;
+        box-shadow: 0 2px 10px rgba(35, 40, 56, 0.06);
         padding: 30px 40px;
 
         h2 {
@@ -98,7 +99,8 @@
             display: flex;
             gap: 28px;
             background-color: #fff;
-            border-radius: 4px;
+            border-radius: 14px;
+            box-shadow: 0 2px 10px rgba(35, 40, 56, 0.06);
             padding: 24px;
             margin-bottom: 18px;
             transition: box-shadow 0.3s;
@@ -116,7 +118,7 @@
             width: 380px;
             height: 240px;
             flex-shrink: 0;
-            border-radius: 4px;
+            border-radius: 14px;
             overflow: hidden;
             background: #eee;
 
@@ -151,7 +153,7 @@
             .subtitle {
                 margin-top: 6px;
                 font-size: 14px;
-                color: $xtxColor;
+                color: $brandColor;
             }
             .desc {
                 margin-top: 10px;
@@ -168,14 +170,14 @@
                     width: 128px;
                     text-align: center;
                     padding: 8px;
-                    border-radius: 4px;
+                    border-radius: 14px;
                     transition: background 0.3s;
 
                     img {
                         width: 96px;
                         height: 96px;
                         object-fit: cover;
-                        border-radius: 4px;
+                        border-radius: 14px;
                     }
                     .g-name {
                         margin-top: 8px;
@@ -188,7 +190,7 @@
                         color: $priceColor;
                     }
                     &:hover {
-                        background: #f7fbfa;
+                        background: #fff8f5;
                     }
                 }
             }

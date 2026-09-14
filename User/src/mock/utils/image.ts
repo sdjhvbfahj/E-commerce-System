@@ -23,20 +23,20 @@ export interface ImageOptions {
     subLabel?: string;
 }
 
-/** 小兔鲜风格的一组渐变色 */
+/** 621电商风格的一组渐变色（以暖橙为主，配几个冷色做点缀） */
 const PALETTE: ReadonlyArray<readonly [string, string]> = [
-    ['#5dd1b4', '#0d9e83'],
-    ['#8cc6ff', '#4a7fd4'],
-    ['#ffd08a', '#f0a33c'],
-    ['#ffb3b3', '#e8626d'],
-    ['#c3b4f5', '#7a63d6'],
-    ['#a8e0a0', '#4fa05a'],
-    ['#9fd8e8', '#3d92ad'],
-    ['#f5b8d8', '#d4679f'],
-    ['#ffcf9e', '#e2843d'],
-    ['#a9d3f5', '#5c7fc4'],
+    ['#ffb27a', '#ef5f2a'],
+    ['#ffd28a', '#f0a13c'],
+    ['#ff9e9e', '#e8544f'],
+    ['#f7b7d8', '#d2659c'],
+    ['#b9c6f2', '#5f74c9'],
+    ['#9fd8c4', '#3f9e84'],
+    ['#ffc7a3', '#e07a3c'],
+    ['#c9b6f0', '#7a5fd0'],
+    ['#a8d8f0', '#4a90c2'],
+    ['#ffe0a3', '#e2a82c'],
 ];
-const DEFAULT_GRADIENT: readonly [string, string] = ['#5dd1b4', '#0d9e83'];
+const DEFAULT_GRADIENT: readonly [string, string] = ['#ffb27a', '#ef5f2a'];
 
 const FONT_STACK = "'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,'Segoe UI',sans-serif";
 

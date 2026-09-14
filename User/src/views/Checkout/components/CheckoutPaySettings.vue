@@ -113,7 +113,7 @@
 
         &.active,
         &:hover {
-            border-color: $xtxColor;
+            border-color: $brandColor;
         }
     }
 
