@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { loginAPI, getProfileAPI } from '@/apis/auth.ts'
+import { usePermissionStore } from '@/stores/permissionStore.ts'
 
 export interface AdminInfo {
     id: string;
@@ -63,6 +64,8 @@ export const useUserStore = defineStore('adminUser', {
         logout() {
             this.token = '';
             this.adminInfo = { ...EMPTY_INFO };
+            // 顺手清掉左侧菜单，避免换账号登录时残留上一个账号的菜单
+            usePermissionStore().clearMenus();
         },
     },
     persist: true,

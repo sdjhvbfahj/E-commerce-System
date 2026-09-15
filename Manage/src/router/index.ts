@@ -177,9 +177,14 @@ router.beforeEach((to) => {
   const userStore = useUserStore();
   const permissionStore = usePermissionStore();
 
-  // 登录成功后按权限码生成一次左侧菜单
-  if (userStore.isLogin && !permissionStore.menus.length) {
+  // 登录后按「账号 + 权限码」签名生成左侧菜单；签名变了（换账号登录、权限变更）就重建，
+  // 避免 A 账号退出后 B 账号登录还看到 A 的菜单
+  const menuKey = userStore.isLogin
+    ? `${userStore.adminInfo.username}:${[...userStore.permissions].sort().join(',')}`
+    : '';
+  if (userStore.isLogin && permissionStore.menusKey !== menuKey) {
     permissionStore.buildMenus(userStore.permissions);
+    permissionStore.menusKey = menuKey;
   }
 
   // 已登录访问登录页 -> 直接回概览

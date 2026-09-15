@@ -75,6 +75,8 @@ export const ADMIN_MENUS: MenuItem[] = [
 export const usePermissionStore = defineStore('adminPermission', {
     state: () => ({
         menus: [] as MenuItem[],
+        /** 当前菜单对应的「账号 + 权限码」签名，签名变化时重建菜单（换账号登录 / 权限变更） */
+        menusKey: '',
         /** 折叠侧边栏 */
         collapsed: false,
     }),
@@ -86,6 +88,11 @@ export const usePermissionStore = defineStore('adminPermission', {
                     .map((item) => (item.children ? { ...item, children: filter(item.children) } : item))
                     .filter((item) => !item.children || item.children.length > 0);
             this.menus = filter(ADMIN_MENUS);
+        },
+        /** 退出登录时清空菜单，避免下一个账号看到上一个账号的菜单 */
+        clearMenus() {
+            this.menus = [];
+            this.menusKey = '';
         },
         toggleCollapsed() {
             this.collapsed = !this.collapsed;
