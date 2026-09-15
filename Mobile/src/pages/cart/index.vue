@@ -5,11 +5,7 @@
             <view :style="{ height: statusBarHeight + 'px' }"></view>
             <view class="topbar__row" :style="topbarStyle">
                 <view class="m-deco">
-                    <view class="m-deco__line"></view>
-                    <view class="m-deco__dot"></view>
                     <text class="m-deco__name">购物车</text>
-                    <view class="m-deco__dot"></view>
-                    <view class="m-deco__line"></view>
                 </view>
             </view>
         </view>
@@ -202,6 +198,7 @@
     .topbar__row {
         display: flex;
         align-items: center;
+        justify-content: center;
         padding: 0 $pagePadding;
     }
 
