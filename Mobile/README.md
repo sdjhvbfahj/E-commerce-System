@@ -51,11 +51,60 @@ npm run type-check      # vue-tsc 类型检查
 1. `npm run build:app`（或 `npm run dev:app`）生成 `dist/build/app`
 2. 打开 **HBuilderX** → 文件 → 导入 → 选择 `dist/build/app`
 3. 手机开 USB 调试后「运行 → 运行到手机或模拟器 → 运行到 Android App 基座」
-4. 要出安装包：HBuilderX「发行 → 原生 App-云打包」（需登录 DCloud 账号，
-   并在 `src/manifest.json` 里填上自己的 `appid`）
+4. 要出安装包：看下面的「打包成 App」
 
 > 目前 `manifest.json` 的 `appid` 是空的（H5 与调试基座不需要），
-> 云打包前必须用 HBuilderX 生成一个 DCloud appid 填进去。
+> **云打包前必须用 HBuilderX 生成一个 DCloud appid 填进去**
+> （HBuilderX 打开 `src/manifest.json` → 基础配置 → AppID 右侧「重新获取」，需登录 DCloud 账号）。
+
+## 打包成 App（HBuilderX）
+
+### 1. 应用图标（已备好，不用再找图）
+
+图标放在 **`unpackage/res/icons/`**，`src/manifest.json` 的 `app-plus.distribute.icons` 已配好全部槽位：
+
+| 平台 | 尺寸 |
+|---|---|
+| Android | 48 / 72 / 96 / 144 / 192（mdpi ~ xxxhdpi） |
+| iOS | 20 / 29 / 40 / 58 / 60 / 76 / 80 / 87 / 120 / 152 / 167 / 180 + App Store **1024** |
+
+主视觉是**品牌渐变底 + 白色「621」**（和 App 内首页 logo、TabBar 同一套色），
+已按 iOS 要求去掉透明通道，全部是 RGB PNG；另附 `round-512.png` 圆形版（只在需要圆形头像/宣传图时使用，不参与打包）。
+
+改设计就重跑生成脚本（依赖 Pillow）：
+
+```bash
+python scripts/generate-app-icon.py     # 会重新生成全部尺寸 + 一张尺寸预览图
+```
+
+> HBuilderX 里也可以走可视化流程：打开 manifest.json → App图标配置 → 上传 1024 图标 → 「自动生成所有图标并替换」，
+> 生成结果同样是写进 `unpackage/res/icons/`，和现在这套完全兼容。
+
+### 2. 打包（两种方式都行）
+
+**方式一：HBuilderX 直接打开项目（推荐）**
+
+1. HBuilderX → 文件 → 打开目录 → 选 `Mobile`（CLI 工程，HBuilderX 会自动识别）
+2. 菜单「发行 → 原生 App-云打包」
+3. 勾选 Android（iOS 需苹果证书）；测试阶段 Android 可勾「使用 DCloud 老版证书」
+4. 打包完成后下载 APK，装到手机上桌面图标就是新生成的图标
+
+**方式二：CLI 构建 + HBuilderX 导入产物**
+
+```bash
+npm run build:app     # 构建后会自动把图标复制到 dist/build/app/unpackage/res/icons
+```
+
+HBuilderX → 导入 → 选 `dist/build/app` → 运行 / 发行。
+（`scripts/copy-app-icons.mjs` 就是为这种方式准备的：CLI 产物目录下也必须有图标文件，
+manifest 里 `unpackage/res/icons/...` 的相对路径才找得到。）
+
+### 3. 还没做的
+
+- **启动图（splash）**：现在用默认白屏。要自定义启动图（Anroid/iOS 各一套尺寸）说一声，我按规格生成。
+- **iOS 打包**：需要苹果开发者证书（.p12 + .mobileprovision），这个得你自己准备。
+- 小程序不需要这套图标（小程序头像/图标在微信公众平台里配）。
+
 
 ### ⚠️ 为什么依赖锁在 `3.0.0-5010420260703001`（HBuilderX 5.14 线）
 
