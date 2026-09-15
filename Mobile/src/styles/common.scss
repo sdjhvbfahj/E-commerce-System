@@ -1,0 +1,186 @@
+// ==========================================================================
+// 621电商移动端 · 全局样式与公共类
+// --------------------------------------------------------------------------
+// 在 App.vue 里引入一次即可（全局生效）。页面里可直接使用 .m-card / .m-btn 等类。
+// ==========================================================================
+
+page {
+    background-color: $bgColor;
+    color: $inkColor;
+    font-size: $fsBase;
+    font-family: -apple-system, 'PingFang SC', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+}
+
+view,
+text,
+image,
+scroll-view,
+swiper {
+    box-sizing: border-box;
+}
+
+// ---------- 页面骨架 ----------
+.m-page {
+    min-height: 100vh;
+}
+
+// 底部有固定操作条时，给内容留出位置
+.m-page--with-bar {
+    padding-bottom: 140rpx;
+    @include safe-bottom(140rpx);
+}
+
+// ---------- 卡片 ----------
+.m-card {
+    background: #fff;
+    border-radius: $radiusMd;
+    box-shadow: $shadowSm;
+}
+
+.m-block {
+    margin: $gapMd $pagePadding 0;
+}
+
+// 分组标题
+.m-title {
+    @include section-title;
+}
+
+// ---------- 按钮 ----------
+.m-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 84rpx;
+    border-radius: 42rpx;
+    font-size: $fsMd;
+    color: #fff;
+    background: $brandGradient;
+    box-shadow: 0 8rpx 20rpx rgba(239, 95, 42, 0.24);
+
+    &:active {
+        opacity: 0.86;
+    }
+
+    &--plain {
+        color: $brandColor;
+        background: $brandColorSoft;
+        box-shadow: none;
+    }
+
+    &--ghost {
+        color: $inkColor2;
+        background: #fff;
+        border: 1px solid $lineColor;
+        box-shadow: none;
+    }
+
+    &--disabled {
+        color: #fff;
+        background: #d8dbe2;
+        box-shadow: none;
+    }
+
+    &--sm {
+        height: 60rpx;
+        padding: 0 $gapMd;
+        font-size: $fsSm;
+        border-radius: 30rpx;
+    }
+}
+
+/* hover-class 用（uni 的按压反馈类需要能在全局找到） */
+.m-btn--press {
+    opacity: 0.86;
+}
+
+// ---------- 标签 ----------
+.m-tag {
+    display: inline-flex;
+    align-items: center;
+    height: 36rpx;
+    padding: 0 12rpx;
+    border-radius: $radiusXs;
+    font-size: $fsXs;
+    color: $brandColor;
+    background: $brandColorSoft;
+
+    &--gray {
+        color: $inkColor3;
+        background: #f2f3f6;
+    }
+
+    &--green {
+        color: $sucColor;
+        background: #eafaf1;
+    }
+
+    &--solid {
+        color: #fff;
+        background: $brandGradient;
+    }
+}
+
+// ---------- 价格 ----------
+.m-price {
+    color: $priceColor;
+    font-weight: 600;
+    font-family: -apple-system, 'DIN Alternate', 'PingFang SC', sans-serif;
+
+    &__symbol {
+        font-size: $fsSm;
+    }
+
+    &__num {
+        font-size: $fsLg;
+    }
+
+    &--old {
+        margin-left: 10rpx;
+        color: $inkColor3;
+        font-size: $fsSm;
+        font-weight: 400;
+        text-decoration: line-through;
+    }
+}
+
+// ---------- 文本 ----------
+.m-ellipsis {
+    @include ellipsis;
+}
+
+.m-ellipsis-2 {
+    @include ellipsis-lines(2);
+}
+
+.m-muted {
+    color: $inkColor3;
+    font-size: $fsSm;
+}
+
+// ---------- 结算 / 提交固定底栏 ----------
+// bottom 用 uni 提供的 --window-bottom：在 tabBar 页面会自动落在 tabBar 之上，
+// 普通页面该值为 0，两种页面共用一套样式
+.m-action-bar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: var(--window-bottom, 0);
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    gap: $gapMd;
+    padding: $gapSm $pagePadding;
+    background: #fff;
+    box-shadow: 0 -2rpx 16rpx rgba(35, 40, 56, 0.06);
+    @include safe-bottom($gapSm);
+}
+
+// ---------- 加载 / 空空如也 ----------
+.m-loadmore {
+    padding: $gapLg 0 $gapMd;
+    text-align: center;
+    color: $inkColor3;
+    font-size: $fsSm;
+}

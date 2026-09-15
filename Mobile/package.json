@@ -1,0 +1,39 @@
+{
+  "name": "621-mall-mobile",
+  "version": "0.0.0",
+  "private": true,
+  "description": "621 电商移动端（uni-app，编译 H5 与 App）",
+  "type": "module",
+  "scripts": {
+    "dev:h5": "uni",
+    "dev:app": "uni -p app",
+    "dev:mp-weixin": "uni -p mp-weixin",
+    "build:h5": "uni build",
+    "build:app": "uni build -p app",
+    "build:mp-weixin": "uni build -p mp-weixin",
+    "type-check": "vue-tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@dcloudio/uni-app": "3.0.0-5010420260703001",
+    "@dcloudio/uni-app-plus": "3.0.0-5010420260703001",
+    "@dcloudio/uni-components": "3.0.0-5010420260703001",
+    "@dcloudio/uni-h5": "3.0.0-5010420260703001",
+    "@dcloudio/uni-mp-weixin": "3.0.0-5010420260703001",
+    "dayjs": "^1.11.20",
+    "pinia": "^2.2.6",
+    "vue": "^3.4.21"
+  },
+  "devDependencies": {
+    "@dcloudio/types": "^3.4.31",
+    "@dcloudio/uni-cli-shared": "3.0.0-5010420260703001",
+    "@dcloudio/uni-stacktracey": "3.0.0-5010420260703001",
+    "@dcloudio/vite-plugin-uni": "3.0.0-5010420260703001",
+    "sass": "~1.77.8",
+    "typescript": "~5.5.4",
+    "vite": "5.2.8",
+    "vue-tsc": "^2.0.29"
+  },
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  }
+}

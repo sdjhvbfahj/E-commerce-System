@@ -1,0 +1,125 @@
+// ==========================================================================
+// 621电商移动端 · 设计变量
+// --------------------------------------------------------------------------
+// uni-app 会把本文件自动注入到每个 <style lang="scss"> 中，
+// 所以页面/组件里可以直接用下面的变量和 mixin，不需要 @import。
+// 设计基准 750rpx（iPhone 6/7/8，1px = 2rpx），尺寸统一用 rpx。
+// 颜色与用户端、管理端完全同源（见 User/src/styles/var.scss）。
+// ==========================================================================
+
+// ---------- 品牌色 ----------
+$brandColor: #ef5f2a; // 主色（暖橙红）
+$brandColorDark: #d34a17; // 主色-深（按压态）
+$brandColorLight: #ff8a4c; // 主色-浅（渐变起点）
+$brandColorSoft: #fff2ec; // 主色-极浅（标签底）
+$brandGradient: linear-gradient(120deg, #ff8a4c 0%, #ef5f2a 55%, #e8451a 100%);
+
+// ---------- 功能色 ----------
+$sucColor: #12b76a;
+$warnColor: #f79009;
+$helpColor: #f04438;
+$priceColor: #ef3f1a;
+
+// ---------- 中性色 ----------
+$inkColor: #232838; // 标题 / 主文字
+$inkColor2: #5a6072; // 正文 / 次要文字
+$inkColor3: #9aa0b0; // 辅助说明
+$lineColor: #eceef2; // 分割线
+$bgColor: #f5f6f8; // 页面底色
+
+// ---------- 圆角 / 阴影 ----------
+$radiusXs: 8rpx;
+$radiusSm: 12rpx;
+$radiusMd: 20rpx;
+$radiusLg: 28rpx;
+$shadowSm: 0 2rpx 12rpx rgba(35, 40, 56, 0.05);
+$shadowMd: 0 8rpx 24rpx rgba(35, 40, 56, 0.09);
+
+// ---------- 字号（rpx）----------
+$fsXs: 22rpx;
+$fsSm: 24rpx;
+$fsBase: 26rpx;
+$fsMd: 28rpx;
+$fsLg: 32rpx;
+$fsXl: 38rpx;
+
+// ---------- 间距（rpx）----------
+$gapXs: 8rpx;
+$gapSm: 16rpx;
+$gapMd: 24rpx;
+$gapLg: 32rpx;
+$pagePadding: 24rpx; // 页面左右留白
+
+// ---------- 常用 mixin ----------
+// 白卡片
+@mixin card($radius: $radiusMd) {
+    background: #fff;
+    border-radius: $radius;
+    box-shadow: $shadowSm;
+}
+
+// 单行省略
+@mixin ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+// 多行省略
+@mixin ellipsis-lines($line: 2) {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $line;
+}
+
+// 底部安全区（全面屏）
+@mixin safe-bottom($extra: 0rpx) {
+    padding-bottom: calc(#{$extra} + constant(safe-area-inset-bottom));
+    padding-bottom: calc(#{$extra} + env(safe-area-inset-bottom));
+}
+
+// 顶部状态栏占位（自定义导航用）
+@mixin safe-top($extra: 0rpx) {
+    padding-top: calc(#{$extra} + constant(safe-area-inset-top));
+    padding-top: calc(#{$extra} + env(safe-area-inset-top));
+}
+
+// 区块小标题：左侧主色竖条
+@mixin section-title {
+    position: relative;
+    padding-left: 18rpx;
+    font-size: $fsLg;
+    font-weight: 600;
+    color: $inkColor;
+
+    &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        width: 6rpx;
+        height: 30rpx;
+        transform: translateY(-50%);
+        border-radius: 4rpx;
+        background: $brandGradient;
+    }
+}
+
+// 1 物理像素分割线（H5 / App 都能用）
+@mixin hairline-top($color: $lineColor) {
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 200%;
+        height: 200%;
+        transform: scale(0.5);
+        transform-origin: 0 0;
+        border-top: 1px solid $color;
+        pointer-events: none;
+    }
+}
