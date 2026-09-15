@@ -1,0 +1,32 @@
+/* 只需要重写你需要的即可 */
+@forward 'element-plus/theme-chalk/src/common/var.scss' with (
+    $colors: (
+        'primary': (
+            // 主色
+            'base': #ef5f2a,
+        ),
+        'success': (
+            // 成功色
+            'base': #12b76a,
+        ),
+        'warning': (
+            // 警告色
+            'base': #f79009,
+        ),
+        'danger': (
+            // 危险色
+            'base': #f04438,
+        ),
+        'error': (
+            // 错误色
+            'base': #f04438,
+        ),
+    ),
+    // 整体圆角调大一点，和新的卡片风格统一
+    $border-radius: (
+        'base': 10px,
+        'small': 8px,
+        'round': 24px,
+        'circle': 100%,
+    )
+);

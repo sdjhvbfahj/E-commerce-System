@@ -1,0 +1,238 @@
+// ==========================================================================
+// 621电商 · 运营管理端 全局样式
+// 说明：变量（颜色/圆角/阴影）与用户端完全一致，来自 styles/var.scss
+// ==========================================================================
+
+// ---------- 重置 ----------
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  font-size: 14px;
+}
+
+body {
+  height: 100%;
+  color: $inkColor;
+  // 管理端按文档要求：自适应，最小 1100px
+  min-width: 1100px;
+  font: 1em/1.4 'Microsoft Yahei', 'PingFang SC', 'Avenir', 'Segoe UI',
+    'Hiragino Sans GB', 'STHeiti', 'Microsoft Sans Serif', 'WenQuanYi Micro Hei',
+    sans-serif;
+  background-color: $bgColor;
+}
+
+body,
+ul,
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+dl,
+dd {
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: $inkColor;
+  outline: none;
+  transition: color 0.25s ease;
+}
+
+i {
+  font-style: normal;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  vertical-align: middle;
+}
+
+#app {
+  height: 100%;
+  user-select: none;
+}
+
+// ---------- 滚动条 ----------
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: #d9dce3;
+  border-radius: 8px;
+
+  &:hover {
+    background: #c3c7d1;
+  }
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::selection {
+  background: rgba(239, 95, 42, 0.18);
+}
+
+// ---------- 通用工具类 ----------
+.ellipsis {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.ellipsis-2 {
+  word-break: break-all;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.text-muted {
+  color: $inkColor3;
+}
+
+.text-brand {
+  color: $brandColor;
+}
+
+.text-price {
+  color: $priceColor;
+}
+
+// ---------- 布局骨架 ----------
+// 每个页面的最外层
+.page {
+  padding: 16px;
+}
+
+// 白色卡片（和用户端的 .es-card 同一套视觉）
+.es-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(35, 40, 56, 0.06);
+}
+
+// 查询条件区
+.query-card {
+  @include card(12px);
+  padding: 18px 20px 2px;
+  margin-bottom: 14px;
+}
+
+// 表格区
+.table-card {
+  @include card(12px);
+  padding: 16px 20px 8px;
+}
+
+// 卡片内的工具条：左侧标题/统计，右侧按钮组
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+  min-height: 32px;
+
+  .toolbar-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    color: $inkColor;
+
+    .count {
+      font-size: 13px;
+      font-weight: 400;
+      color: $inkColor3;
+    }
+  }
+
+  .toolbar-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+}
+
+// 分页容器
+.pager {
+  display: flex;
+  justify-content: flex-end;
+  padding: 14px 0 10px;
+}
+
+// ---------- Element Plus 微调（和用户端保持一致的圆角与配色） ----------
+.el-breadcrumb__inner.is-link {
+  font-weight: 400 !important;
+}
+
+// 表格：表头浅底、行高舒服、去掉多余竖线
+.el-table {
+  --el-table-border-color: #{$lineColor};
+  --el-table-header-bg-color: #f7f8fa;
+  --el-table-header-text-color: #{$inkColor2};
+  --el-table-text-color: #{$inkColor2};
+  --el-table-row-hover-bg-color: #{$brandColorSoft};
+
+  th.el-table__cell {
+    font-weight: 500;
+  }
+
+  .el-table__cell {
+    padding: 10px 0;
+  }
+}
+
+// 弹窗圆角
+.el-dialog {
+  border-radius: 14px;
+  overflow: hidden;
+
+  .el-dialog__header {
+    margin-right: 0;
+    padding: 18px 22px;
+    border-bottom: 1px solid $lineColor;
+
+    .el-dialog__title {
+      font-size: 16px;
+      font-weight: 500;
+      color: $inkColor;
+    }
+  }
+
+  .el-dialog__body {
+    padding: 20px 22px;
+  }
+
+  .el-dialog__footer {
+    padding: 14px 22px;
+    border-top: 1px solid $lineColor;
+  }
+}
+
+// 抽屉圆角
+.el-drawer__header {
+  margin-bottom: 0;
+  padding: 18px 22px;
+  border-bottom: 1px solid $lineColor;
+  color: $inkColor;
+  font-weight: 500;
+}
+
+.el-drawer__body {
+  padding: 20px 22px;
+}
