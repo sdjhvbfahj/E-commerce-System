@@ -88,7 +88,7 @@
             .g-card__pic {
                 width: 200rpx;
                 height: 200rpx;
-                border-radius: $radiusSm;
+                border-radius: $radiusXs;
                 flex-shrink: 0;
             }
 
@@ -111,10 +111,13 @@
     }
 
     .g-card__name {
+        display: block;
         font-size: $fsBase;
         line-height: 1.4;
         color: $inkColor;
-        max-height: 76rpx;
+        /* 固定两行高度：一行名 / 两行名的卡片高度才会一致，不会被撑大 */
+        height: 76rpx;
+        overflow: hidden;
     }
 
     .g-card__desc {
@@ -123,17 +126,20 @@
         font-size: $fsSm;
     }
 
+    /* 价格一行、销量一行：卡片再窄也不会「价格被截断 / 销量被挤没」 */
     .g-card__foot {
         margin-top: $gapSm;
         display: flex;
-        align-items: baseline;
-        justify-content: space-between;
-        gap: $gapSm;
+        flex-direction: column;
+        gap: 2rpx;
+        overflow: hidden;
     }
 
     .g-card__sales {
         color: $inkColor3;
         font-size: $fsXs;
-        flex-shrink: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 </style>

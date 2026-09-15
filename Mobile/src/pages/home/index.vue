@@ -89,12 +89,17 @@
             </view>
         </view>
         <MLoadMore :status="likeStatus" @load="loadMoreLike" />
+
+        <!-- 回到顶部：滚动超过一屏才出现 -->
+        <view v-if="showBackTop" class="m-backtop" hover-class="m-backtop--press" @click="backToTop">
+            <view class="m-backtop__arrow"></view>
+        </view>
     </view>
 </template>
 
 <script setup lang="ts">
     import { computed, ref } from 'vue'
-    import { onLoad, onPullDownRefresh, onReachBottom } from '@dcloudio/uni-app'
+    import { onLoad, onPageScroll, onPullDownRefresh, onReachBottom } from '@dcloudio/uni-app'
     import { getBannerAPI, getGoodsAPI, getHotAPI, getNewAPI } from '@/apis/home.ts'
     import { getLikeListAPI } from '@/apis/user.ts'
     import { useCategoryStore } from '@/stores/categoryStore.ts'
@@ -143,6 +148,9 @@
     const likeList = ref<GoodsLike[]>([])
     const likeStatus = ref<'more' | 'loading' | 'nomore'>('more')
     const likePage = ref(0)
+    /** 回到顶部按钮：滚动超过 600px 才显示 */
+    const showBackTop = ref(false)
+    const BACK_TOP_OFFSET = 600
 
     /** 首屏数据一次性并发拉取（都是本地假数据，够快） */
     async function loadAll() {
@@ -177,6 +185,10 @@
 
     function goSearch() {
         uni.navigateTo({ url: '/pages/search/index' })
+    }
+
+    function backToTop() {
+        uni.pageScrollTo({ scrollTop: 0, duration: 260 })
     }
 
     function goDetail(id: string) {
@@ -225,6 +237,12 @@
     onReachBottom(() => {
         loadMoreLike()
     })
+
+    onPageScroll((event) => {
+        const top = Number(event?.scrollTop ?? 0)
+        const next = top > BACK_TOP_OFFSET
+        if (next !== showBackTop.value) showBackTop.value = next
+    })
 </script>
 
 <style scoped lang="scss">
@@ -259,7 +277,7 @@
         justify-content: center;
         width: 64rpx;
         height: 64rpx;
-        border-radius: 18rpx;
+        border-radius: 6rpx;
         background: $brandGradient;
         box-shadow: 0 6rpx 14rpx rgba(239, 95, 42, 0.24);
 
@@ -288,7 +306,7 @@
         gap: $gapSm;
         height: 66rpx;
         padding: 0 $gapMd;
-        border-radius: 34rpx;
+        border-radius: 6rpx;
         background: #f2f3f6;
 
         &--press {
@@ -430,5 +448,9 @@
     /* ---------- 楼层 ---------- */
     .floor {
         margin-top: $gapSm;
+    }
+
+    .m-backtop--press {
+        background: #f2f3f6;
     }
 </style>

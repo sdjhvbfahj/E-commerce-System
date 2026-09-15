@@ -467,7 +467,7 @@
         min-width: 30rpx;
         height: 30rpx;
         padding: 0 6rpx;
-        border-radius: 15rpx;
+        border-radius: 4rpx;
         background: $brandColor;
         color: #fff;
         font-size: 18rpx;
@@ -480,6 +480,6 @@
         flex: 1;
         height: 76rpx;
         font-size: $fsBase;
-        border-radius: 38rpx;
+        border-radius: 6rpx;
     }
 </style>

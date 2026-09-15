@@ -52,7 +52,7 @@
     .m-loadmore__more {
         padding: 8rpx 28rpx;
         border: 1px solid $lineColor;
-        border-radius: 30rpx;
+        border-radius: 4rpx;
 
         &--press {
             background: #f4f5f8;

@@ -28,10 +28,11 @@ $lineColor: #eceef2; // 分割线
 $bgColor: #f5f6f8; // 页面底色
 
 // ---------- 圆角 / 阴影 ----------
-$radiusXs: 8rpx;
-$radiusSm: 12rpx;
-$radiusMd: 20rpx;
-$radiusLg: 28rpx;
+// 2026-09-15：整体改成「几乎没有圆角」的硬朗风格，只保留一点点过渡
+$radiusXs: 0;
+$radiusSm: 2rpx;
+$radiusMd: 2rpx;
+$radiusLg: 2rpx;
 $shadowSm: 0 2rpx 12rpx rgba(35, 40, 56, 0.05);
 $shadowMd: 0 8rpx 24rpx rgba(35, 40, 56, 0.09);
 

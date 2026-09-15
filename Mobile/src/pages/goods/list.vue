@@ -169,7 +169,7 @@
         height: 56rpx;
         display: flex;
         align-items: center;
-        border-radius: 28rpx;
+        border-radius: 4rpx;
         background: #f4f5f8;
         color: $inkColor2;
         font-size: $fsSm;

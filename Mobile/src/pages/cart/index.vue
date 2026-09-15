@@ -1,5 +1,19 @@
 <template>
     <view class="cart m-page m-page--with-bar">
+        <!-- 顶部标题：与分类页保持一致的装饰样式 -->
+        <view class="topbar">
+            <view :style="{ height: statusBarHeight + 'px' }"></view>
+            <view class="topbar__row" :style="topbarStyle">
+                <view class="m-deco">
+                    <view class="m-deco__line"></view>
+                    <view class="m-deco__dot"></view>
+                    <text class="m-deco__name">购物车</text>
+                    <view class="m-deco__dot"></view>
+                    <view class="m-deco__line"></view>
+                </view>
+            </view>
+        </view>
+
         <!-- 未登录提示 -->
         <view v-if="!userStore.isLogin" class="notice" hover-class="notice--press" @click="goLogin">
             <text>登录后可同步购物车，换设备也不丢</text>
@@ -77,14 +91,23 @@
 </template>
 
 <script setup lang="ts">
-    import { ref } from 'vue'
+    import { computed, ref } from 'vue'
     import { onShow } from '@dcloudio/uni-app'
     import { useCartStore, type CartItem } from '@/stores/cartStore.ts'
     import { useUserStore } from '@/stores/userStore.ts'
     import { ensureLogin, toast } from '@/utils/auth.ts'
+    import { useNavBar } from '@/utils/nav.ts'
 
     const cartStore = useCartStore()
     const userStore = useUserStore()
+    const { statusBarHeight, barHeight, rightInset } = useNavBar()
+
+    /** 顶部行高：小程序里要给右上角胶囊留位置，同时保证放得下标题 */
+    const topbarStyle = computed(() => {
+        const style: Record<string, string> = { height: `${Math.max(barHeight.value, 44)}px` }
+        if (rightInset.value > 0) style.paddingRight = `${rightInset.value}px`
+        return style
+    })
 
     /** 左滑删除：记录每一项的位移（px）。删除按钮宽 140rpx，按当前屏幕换算成 px */
     const DELETE_WIDTH = typeof uni.upx2px === 'function' ? uni.upx2px(140) : 70
@@ -170,6 +193,18 @@
 </script>
 
 <style scoped lang="scss">
+    .topbar {
+        background: #fff;
+        border-radius: 0 0 $radiusMd $radiusMd;
+        padding-bottom: $gapSm;
+    }
+
+    .topbar__row {
+        display: flex;
+        align-items: center;
+        padding: 0 $pagePadding;
+    }
+
     .notice {
         display: flex;
         align-items: center;
@@ -202,7 +237,8 @@
         position: relative;
         border-radius: $radiusMd;
         overflow: hidden;
-        background: $helpColor;
+        /* 这里不能铺删除色：圆角处会透出一圈红线，看起来像虚线边框 */
+        background: transparent;
     }
 
     .swipe__content {
@@ -225,6 +261,8 @@
         justify-content: center;
         color: #fff;
         font-size: $fsBase;
+        background: $helpColor;
+        border-radius: 0 $radiusMd $radiusMd 0;
     }
 
     /* ---------- 行 ---------- */
@@ -283,7 +321,7 @@
     .check {
         width: 40rpx;
         height: 40rpx;
-        border-radius: 50%;
+        border-radius: 4rpx;
         border: 2rpx solid #ccd0d9;
         display: flex;
         align-items: center;

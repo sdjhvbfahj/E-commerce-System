@@ -138,7 +138,7 @@
     .login__mark {
         width: 128rpx;
         height: 128rpx;
-        border-radius: 36rpx;
+        border-radius: 8rpx;
         background: $brandGradient;
         display: flex;
         align-items: center;
@@ -273,7 +273,7 @@
         height: 60rpx;
         display: flex;
         align-items: center;
-        border-radius: 30rpx;
+        border-radius: 4rpx;
         background: #fff;
         border: 1px solid $lineColor;
         color: $inkColor2;

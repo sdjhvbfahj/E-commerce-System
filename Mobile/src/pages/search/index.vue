@@ -17,9 +17,10 @@
                         confirm-type="search"
                         placeholder="搜索商品、分类"
                         placeholder-class="bar__ph"
-                        @confirm="doSearch(keyword)"
+                        @input="onKeywordInput"
+                        @confirm="searchNow"
                     />
-                    <view v-if="keyword" class="bar__clear" @click="keyword = ''">
+                    <view v-if="keyword" class="bar__clear" @click="clearKeyword">
                         <view class="cross cross--a"></view>
                         <view class="cross cross--b"></view>
                     </view>
@@ -94,6 +95,7 @@
     import { ref } from 'vue'
     import { onLoad, onReachBottom } from '@dcloudio/uni-app'
     import { getSearchAPI } from '@/apis/search.ts'
+    import { debounce } from '@/utils/debounce.ts'
     import { storage } from '@/utils/storage.ts'
     import { useNavBar } from '@/utils/nav.ts'
     import { useCategoryStore } from '@/stores/categoryStore.ts'
@@ -136,7 +138,12 @@
         storage.removeItem(HISTORY_KEY)
     }
 
-    async function doSearch(word: string) {
+    /**
+     * 执行搜索
+     * record = true 时写入搜索历史（只有「回车 / 点热词 / 点历史」才算用户明确的搜索行为），
+     * 输入过程中的自动搜索不记历史，否则历史里会堆一堆「车」「车厘」这种半截词
+     */
+    async function doSearch(word: string, record = true) {
         const value = word.trim()
         if (!value) return
         keyword.value = value
@@ -144,8 +151,41 @@
         searched.value = true
         page.value = 0
         items.value = []
-        writeHistory(value)
+        if (record) writeHistory(value)
         await loadMore(true)
+    }
+
+    /** 输入即搜（防抖 320ms）：停下来就自动查，不用非按回车 */
+    const searchAfterInput = debounce((value: string) => {
+        const text = value.trim()
+        if (!text) {
+            // 清空了就回到「历史 + 热词」视图，并取消这次搜索
+            searched.value = false
+            items.value = []
+            categories.value = []
+            return
+        }
+        doSearch(text, false)
+    }, 320)
+
+    function onKeywordInput(event: any) {
+        const value = String(event?.detail?.value ?? '')
+        keyword.value = value
+        searchAfterInput(value)
+    }
+
+    /** 回车：立刻搜，并记入历史 */
+    function searchNow() {
+        searchAfterInput.cancel()
+        doSearch(keyword.value, true)
+    }
+
+    function clearKeyword() {
+        keyword.value = ''
+        searchAfterInput.cancel()
+        searched.value = false
+        items.value = []
+        categories.value = []
     }
 
     async function loadMore(reset = false) {
@@ -226,7 +266,7 @@
         gap: $gapSm;
         height: 66rpx;
         padding: 0 $gapMd;
-        border-radius: 34rpx;
+        border-radius: 6rpx;
         background: #f2f3f6;
     }
 
@@ -330,7 +370,7 @@
         height: 60rpx;
         display: flex;
         align-items: center;
-        border-radius: 30rpx;
+        border-radius: 4rpx;
         background: #fff;
         color: $inkColor2;
         font-size: $fsSm;
@@ -361,7 +401,7 @@
         gap: 8rpx;
         height: 60rpx;
         padding: 0 $gapMd;
-        border-radius: 30rpx;
+        border-radius: 4rpx;
         background: #f4f5f8;
         font-size: $fsSm;
         color: $inkColor;

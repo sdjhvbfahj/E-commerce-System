@@ -305,7 +305,7 @@
         min-width: 30rpx;
         height: 30rpx;
         padding: 0 6rpx;
-        border-radius: 15rpx;
+        border-radius: 4rpx;
         background: $brandColor;
         color: #fff;
         font-size: 18rpx;

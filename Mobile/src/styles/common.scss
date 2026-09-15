@@ -47,13 +47,68 @@ swiper {
     @include section-title;
 }
 
+// 装饰标题：—— • 名称 • ——（分类页 / 购物车页共用，整体居中）
+.m-deco {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12rpx;
+}
+
+.m-deco__dot {
+    width: 10rpx;
+    height: 10rpx;
+    border-radius: 50%;
+    background: $brandColor;
+    flex-shrink: 0;
+}
+
+.m-deco__name {
+    font-size: $fsMd;
+    font-weight: 600;
+    color: $inkColor;
+    flex-shrink: 0;
+    letter-spacing: 1rpx;
+}
+
+.m-deco__line {
+    flex: 1;
+    min-width: 24rpx;
+    height: 2rpx;
+    background: $lineColor;
+}
+
+// 回到顶部（首页右下角悬浮按钮）
+.m-backtop {
+    position: fixed;
+    right: $pagePadding;
+    bottom: calc(var(--window-bottom, 0px) + 40rpx);
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 4rpx;
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 6rpx 20rpx rgba(35, 40, 56, 0.16);
+}
+
+.m-backtop__arrow {
+    width: 22rpx;
+    height: 22rpx;
+    border-top: 4rpx solid $inkColor2;
+    border-left: 4rpx solid $inkColor2;
+    transform: rotate(45deg) translate(3rpx, 3rpx);
+}
+
 // ---------- 按钮 ----------
 .m-btn {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 84rpx;
-    border-radius: 42rpx;
+    border-radius: 6rpx;
     font-size: $fsMd;
     color: #fff;
     background: $brandGradient;
@@ -86,7 +141,7 @@ swiper {
         height: 60rpx;
         padding: 0 $gapMd;
         font-size: $fsSm;
-        border-radius: 30rpx;
+        border-radius: 4rpx;
     }
 }
 
@@ -101,7 +156,7 @@ swiper {
     align-items: center;
     height: 36rpx;
     padding: 0 12rpx;
-    border-radius: $radiusXs;
+    border-radius: 4rpx;
     font-size: $fsXs;
     color: $brandColor;
     background: $brandColorSoft;

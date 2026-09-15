@@ -6,7 +6,7 @@
                 v-for="item in navList"
                 :key="item.id"
                 class="cat__item"
-                :class="{ 'cat__item--active': item.id === activeId }"
+                :class="{ 'cat__item--active': item.id === categoryStore.activeId }"
                 hover-class="cat__item--press"
                 @click="selectCategory(item)"
             >
@@ -17,8 +17,13 @@
         <!-- 右侧：二级分类宫格 + 热门商品 -->
         <view class="cat__main">
             <view v-if="detail" class="cat__banner">
-                <text class="cat__banner-name">{{ detail.name }}</text>
-                <text class="cat__banner-tip">{{ subs.length }} 个细分品类 · {{ goods.length }} 件在售</text>
+                <view class="m-deco">
+                    <view class="m-deco__line"></view>
+                    <view class="m-deco__dot"></view>
+                    <text class="m-deco__name">{{ detail.name }}</text>
+                    <view class="m-deco__dot"></view>
+                    <view class="m-deco__line"></view>
+                </view>
             </view>
 
             <view class="subs">
@@ -52,7 +57,6 @@
     }
 
     const categoryStore = useCategoryStore()
-    const activeId = ref('')
     const detail = ref<{ id: string; name: string; children?: SubCategory[] } | null>(null)
 
     const navList = computed(() => categoryStore.navList)
@@ -72,7 +76,7 @@
     })
 
     async function selectCategory(item: { id: string; name: string }) {
-        if (item.id === activeId.value) return
+        if (item.id === categoryStore.activeId) return
         await categoryStore.getCategoryDetail(item.id)
         detail.value = categoryStore.detail
         uni.pageScrollTo({ scrollTop: 0, duration: 0 })
@@ -84,9 +88,11 @@
 
     onLoad(async () => {
         await categoryStore.getNavList()
-        const first = navList.value[0]
-        const targetId = categoryStore.activeId || first?.id || ''
-        if (first) await selectCategory({ id: targetId, name: first.name })
+        // 首页金刚区点进来时会先把 activeId 写进 store，这里直接沿用
+        const targetId = categoryStore.activeId || navList.value[0]?.id || ''
+        if (!targetId) return
+        await categoryStore.getCategoryDetail(targetId)
+        detail.value = categoryStore.detail
     })
 </script>
 
@@ -123,6 +129,18 @@
             color: $brandColor;
             font-weight: 600;
             background: $brandColorSoft;
+
+            /* 左侧一根主色竖条，选中态一眼看得出来 */
+            &::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 26rpx;
+                bottom: 26rpx;
+                width: 6rpx;
+                border-radius: 0;
+                background: $brandColor;
+            }
         }
 
         &--press {
@@ -138,22 +156,8 @@
     }
 
     .cat__banner {
-        padding: $gapLg $pagePadding $gapMd;
+        padding: $gapMd $pagePadding;
         background: #fff;
-        display: flex;
-        flex-direction: column;
-        gap: 6rpx;
-    }
-
-    .cat__banner-name {
-        font-size: $fsXl;
-        font-weight: 600;
-        color: $inkColor;
-    }
-
-    .cat__banner-tip {
-        color: $inkColor3;
-        font-size: $fsXs;
     }
 
     .subs {
@@ -179,15 +183,22 @@
     .subs__pic {
         width: 140rpx;
         height: 140rpx;
-        border-radius: $radiusSm;
+        border-radius: $radiusXs;
         background: #f2f3f6;
     }
 
+    /* 固定高度 + 单行省略：名字长短不一会把格子撑得高低不一 */
     .subs__name {
+        display: block;
         width: 100%;
+        height: 34rpx;
+        line-height: 34rpx;
         text-align: center;
         font-size: $fsXs;
         color: $inkColor2;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
 
     .grid {

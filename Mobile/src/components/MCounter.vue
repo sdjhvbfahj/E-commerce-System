@@ -67,6 +67,9 @@
     }
 
     .m-counter__btn {
+        /* 必须定位：加号那一竖是绝对定位的，父级不定位就会跑到卡片中间，
+           看起来就是「一个消不掉的数字 1」压在数量上 */
+        position: relative;
         width: 60rpx;
         height: 100%;
         display: flex;

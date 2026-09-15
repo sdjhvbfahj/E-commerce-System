@@ -227,7 +227,7 @@
         margin-top: $gapSm;
         align-self: flex-start;
         padding: 6rpx 16rpx;
-        border-radius: 24rpx;
+        border-radius: 4rpx;
         background: rgba(255, 255, 255, 0.22);
         font-size: $fsXs;
     }

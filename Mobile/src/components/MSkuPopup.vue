@@ -369,7 +369,7 @@
         gap: 8rpx;
         height: 64rpx;
         padding: 0 $gapMd;
-        border-radius: 32rpx;
+        border-radius: 4rpx;
         background: #f4f5f8;
         color: $inkColor;
         font-size: $fsSm;
@@ -391,7 +391,7 @@
     .sku__value-pic {
         width: 40rpx;
         height: 40rpx;
-        border-radius: 6rpx;
+        border-radius: 2rpx;
     }
 
     .sku__actions {
